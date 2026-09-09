@@ -1,0 +1,30 @@
+# robots.txt para readmin (Raúl Engracia - readmin803)
+# Optimizado para buscadores tradicionales y motores de búsqueda con IA (GEO)
+
+User-agent: *
+Allow: /
+
+# Permitir indexación y análisis a bots de modelos de lenguaje e IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://readmin803.vercel.app/sitemap.xml
