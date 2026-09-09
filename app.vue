@@ -4,8 +4,6 @@ import TheFooter from '~/components/layout/TheFooter.vue'
 import HeroSection from '~/components/sections/HeroSection.vue'
 import ProjectsSection from '~/components/sections/ProjectsSection.vue'
 import SkillsSection from '~/components/sections/SkillsSection.vue'
-import AboutSection from '~/components/sections/AboutSection.vue'
-import ContactSection from '~/components/sections/ContactSection.vue'
 
 // Schema.org Structured Data for Search Engines & Generative AI Engines (GEO)
 useHead({
@@ -17,12 +15,11 @@ useHead({
         '@graph': [
           {
             '@type': 'Person',
-            '@id': 'https://readmin.dev/#person',
-            name: 'Raúl Engracia',
-            alternateName: ['readmin', 'readmin803'],
-            jobTitle: 'Lead Frontend & Technical SEO Engineer',
-            description: 'Lead Frontend & Technical SEO Engineer, Ingeniero de Automatizaciones con n8n y Especialista en Arquitecturas Headless (Next.js 16, Sanity.io) y Generative Engine Optimization (GEO).',
-            url: 'https://readmin.dev',
+            '@id': 'https://readmin803.vercel.app/#person',
+            name: 'readmin',
+            alternateName: ['readmin803'],
+            description: 'Portafolio técnico: Automatizaciones n8n, Next.js (SEO & GEO) y aplicaciones web en PHP.',
+            url: 'https://readmin803.vercel.app',
             sameAs: [
               'https://github.com/readmin803'
             ],
@@ -31,21 +28,21 @@ useHead({
               'Sanity.io Headless CMS & Live Content API',
               'Generative Engine Optimization (GEO)',
               'Technical SEO & Core Web Vitals',
-              'JSON-LD Schema.org & Knowledge Graph',
+              'JSON-LD Schema.org',
               'n8n Workflows and Automations',
               'Nuxt.js',
               'PHP Modern Development',
-              'REST APIs & Google OAuth',
+              'REST APIs',
               'Vercel Deployment'
             ]
           },
           {
             '@type': 'WebSite',
-            '@id': 'https://readmin.dev/#website',
-            url: 'https://readmin.dev',
-            name: 'Raúl Engracia (readmin) - Portafolio Profesional',
+            '@id': 'https://readmin803.vercel.app/#website',
+            url: 'https://readmin803.vercel.app',
+            name: 'readmin (@readmin803) - Portafolio',
             publisher: {
-              '@id': 'https://readmin.dev/#person'
+              '@id': 'https://readmin803.vercel.app/#person'
             }
           }
         ]
@@ -57,19 +54,17 @@ useHead({
 
 <template>
   <div class="min-h-screen bg-dark-950 text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
-    <!-- Main Header -->
+    <!-- Navbar: Proyectos & Stack Técnico -->
     <TheNavbar />
 
-    <!-- Main Content -->
+    <!-- Main Content: Hero, Proyectos, Stack Técnico -->
     <main class="flex-grow">
       <HeroSection />
       <ProjectsSection />
       <SkillsSection />
-      <AboutSection />
-      <ContactSection />
     </main>
 
-    <!-- Footer -->
+    <!-- Clean Footer -->
     <TheFooter />
   </div>
 </template>

@@ -49,11 +49,11 @@ const getCategoryIcon = (id: string) => {
         </div>
 
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Proyectos técnicos preparados para aportar valor desde el día uno
+          Proyectos y Casos Técnicos
         </h2>
 
         <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
-          Explora los proyectos divididos en mis tres pilares de especialización: automatizaciones autónomas con <strong class="text-slate-200 font-semibold">n8n</strong>, desarrollo frontend en <strong class="text-slate-200 font-semibold">Next.js</strong> optimizado para SEO e IA, y aplicaciones web empresariales en <strong class="text-slate-200 font-semibold">PHP</strong>.
+          Selección de proyectos divididos por áreas: automatizaciones y flujos de trabajo con <strong class="text-slate-200 font-semibold">n8n</strong>, desarrollo frontend en <strong class="text-slate-200 font-semibold">Next.js</strong> optimizado para SEO e IA (GEO), y aplicaciones web en <strong class="text-slate-200 font-semibold">PHP</strong>.
         </p>
 
         <!-- Category Filter Tabs -->
@@ -92,10 +92,10 @@ const getCategoryIcon = (id: string) => {
         />
       </div>
 
-      <!-- Bottom Note for Recruiters / Companies -->
+      <!-- Bottom Note -->
       <div class="mt-16 p-6 rounded-2xl bg-dark-900/60 border border-slate-800/80 text-center max-w-2xl mx-auto">
         <p class="text-sm text-slate-300 mb-3">
-          ¿Buscas una solución a medida o deseas revisar el código fuente completo y los flujos exportados?
+          Código fuente y proyectos experimentales disponibles en GitHub:
         </p>
         <div class="flex items-center justify-center gap-4">
           <a
@@ -104,7 +104,7 @@ const getCategoryIcon = (id: string) => {
             rel="noopener noreferrer"
             class="text-xs sm:text-sm font-semibold text-cyan-400 hover:text-cyan-300 underline underline-offset-4"
           >
-            Explorar repositorio en GitHub (@readmin803) →
+            Ver repositorios en GitHub (@readmin803) →
           </a>
         </div>
       </div>
