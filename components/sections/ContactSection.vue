@@ -3,11 +3,13 @@ import { ref } from 'vue'
 import {
   Github,
   Send,
-  CheckCircle2
+  CheckCircle2,
+  MessageSquareCode
 } from 'lucide-vue-next'
 
 const isSubmitting = ref(false)
 const isSubmitted = ref(false)
+const errorMessage = ref('')
 
 const formState = ref({
   name: '',
@@ -16,15 +18,25 @@ const formState = ref({
   message: ''
 })
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   isSubmitting.value = true
-  setTimeout(() => {
-    isSubmitting.value = false
+  errorMessage.value = ''
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: formState.value.name,
+        email: formState.value.email,
+        subject: formState.value.subject,
+        message: formState.value.message
+      }
+    })
     isSubmitted.value = true
-    const subject = encodeURIComponent(formState.value.subject || 'Oportunidad / Consulta técnica desde el Portafolio')
-    const body = encodeURIComponent(`Hola,\n\nNombre: ${formState.value.name}\nEmail: ${formState.value.email}\n\nMensaje:\n${formState.value.message}`)
-    window.location.href = `mailto:${body}`
-  }, 600)
+  } catch {
+    errorMessage.value = 'No se pudo enviar el mensaje. Inténtalo de nuevo.'
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -59,9 +71,9 @@ const handleSubmit = () => {
 
               <div v-if="isSubmitted" class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2">
                 <CheckCircle2 class="w-8 h-8 text-emerald-400 mx-auto" />
-                <h4 class="text-sm font-bold text-white">¡Mensaje preparado!</h4>
+                <h4 class="text-sm font-bold text-white">¡Mensaje enviado!</h4>
                 <p class="text-xs text-slate-300">
-                  Se abrirá tu cliente de correo.
+                  Gracias por escribir. Te responderé lo antes posible.
                 </p>
                 <button
                   @click="isSubmitted = false"
@@ -72,6 +84,9 @@ const handleSubmit = () => {
               </div>
 
               <form v-else @submit.prevent="handleSubmit" class="space-y-4">
+                <div v-if="errorMessage" class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-300">
+                  {{ errorMessage }}
+                </div>
                 <div>
                   <label for="name" class="block text-xs font-mono font-medium text-slate-300 mb-1.5">
                     Tu nombre *
@@ -133,7 +148,7 @@ const handleSubmit = () => {
                   class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 transition-all shadow-md shadow-cyan-600/20 disabled:opacity-50"
                 >
                   <Send class="w-4 h-4" />
-                  <span>{{ isSubmitting ? 'Preparando...' : 'Enviar Consulta' }}</span>
+                  <span>{{ isSubmitting ? 'Enviando...' : 'Enviar Consulta' }}</span>
                 </button>
               </form>
             </div>
