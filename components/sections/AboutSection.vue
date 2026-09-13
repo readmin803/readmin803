@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {
   User,
-  ShieldCheck,
-  Zap,
-  Bot,
-  Gauge,
-  Layers
+  Workflow,
+  Code2,
+  Database
 } from 'lucide-vue-next'
 </script>
 
@@ -21,60 +19,50 @@ import {
           </div>
 
           <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Detrás de <span class="font-mono text-cyan-400">[re]admin</span>: Raúl Engracia
+            Detrás de <span class="font-mono text-cyan-400">[re]admin</span>: Raúl E.
           </h2>
 
           <div class="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
             <p>
-              El alias <strong class="text-white font-mono font-semibold">readmin</strong> nace de la combinación de mi nombre (<span class="text-cyan-400 font-semibold font-mono">re</span>: Raúl Engracia) con la mentalidad de administración técnica de sistemas, arquitectura y control de procesos (<span class="text-indigo-400 font-semibold font-mono">admin</span>).
+              El alias <strong class="text-white font-mono font-semibold">readmin</strong> combina mi nombre (<span class="text-cyan-400 font-semibold font-mono">re</span>: Raúl E.) con la administración técnica de sistemas y procesos (<span class="text-indigo-400 font-semibold font-mono">admin</span>).
             </p>
             <p>
-              Mi propósito profesional es actuar como un puente entre la lógica de negocio y la ingeniería técnica: no se trata solo de escribir código, sino de <strong>construir activos digitales que generen rentabilidad y eficiencia</strong>.
+              Trabajo en la intersección entre negocio e ingeniería: el código se justifica por el resultado que produce, no por la tecnología que usa.
             </p>
             <p>
-              Me especializo en identificar cuellos de botella manuales en empresas y convertirlos en <strong>flujos automatizados autónomos con n8n</strong>; al mismo tiempo que desarrollo portales web en <strong>Next.js</strong> que no solo deslumbran a los usuarios por su velocidad, sino que se posicionan orgánicamente tanto en los motores de búsqueda convencionales como en la nueva era de la IA generativa (GEO).
+              Detecto tareas manuales que cuestan horas y las convierto en flujos automatizados con n8n; desarrollo aplicaciones web completas y administro bases de datos y servidores.
             </p>
           </div>
 
           <!-- Key Principles -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             <div class="p-4 rounded-xl bg-dark-900/80 border border-slate-800">
               <div class="flex items-center gap-2.5 mb-2">
-                <Zap class="w-4 h-4 text-amber-400" />
-                <h4 class="text-sm font-bold text-white">Rendimiento Primero</h4>
+                <Workflow class="w-4 h-4 text-emerald-400" />
+                <h4 class="text-sm font-bold text-white">Automatización</h4>
               </div>
               <p class="text-xs text-slate-400">
-                Cada milisegundo de carga cuenta. Priorización de recursos y Core Web Vitals al máximo nivel.
+                Flujos n8n con reintentos y tolerancia a fallos que eliminan tareas manuales.
               </p>
             </div>
 
             <div class="p-4 rounded-xl bg-dark-900/80 border border-slate-800">
               <div class="flex items-center gap-2.5 mb-2">
-                <Bot class="w-4 h-4 text-emerald-400" />
-                <h4 class="text-sm font-bold text-white">Automatización Pragmática</h4>
+                <Code2 class="w-4 h-4 text-cyan-400" />
+                <h4 class="text-sm font-bold text-white">Fullstack</h4>
               </div>
               <p class="text-xs text-slate-400">
-                Si una tarea se repite dos veces, es candidata a ser automatizada con n8n y webhooks.
+                Aplicaciones completas con Vue 3, Nuxt 3 y JavaScript, de la interfaz al servidor.
               </p>
             </div>
 
             <div class="p-4 rounded-xl bg-dark-900/80 border border-slate-800">
               <div class="flex items-center gap-2.5 mb-2">
-                <Gauge class="w-4 h-4 text-cyan-400" />
-                <h4 class="text-sm font-bold text-white">SEO & GEO de Vanguardia</h4>
+                <Database class="w-4 h-4 text-indigo-400" />
+                <h4 class="text-sm font-bold text-white">Sistemas</h4>
               </div>
               <p class="text-xs text-slate-400">
-                Estructuración de datos para que tu web sea citada por ChatGPT, Perplexity y Google.
-              </p>
-            </div>
-
-            <div class="p-4 rounded-xl bg-dark-900/80 border border-slate-800">
-              <div class="flex items-center gap-2.5 mb-2">
-                <Layers class="w-4 h-4 text-indigo-400" />
-                <h4 class="text-sm font-bold text-white">Código Limpio y Mantenible</h4>
-              </div>
-              <p class="text-xs text-slate-400">
-                Arquitectura escalable en PHP y TypeScript pensada para evolucionar a largo plazo.
+                Bases de datos, contenedores Docker y mantenimiento de programas técnicos.
               </p>
             </div>
           </div>
@@ -88,24 +76,20 @@ import {
                 RE
               </div>
               <div>
-                <h3 class="text-xl font-bold text-white">Raúl Engracia</h3>
-                <p class="text-xs font-mono text-cyan-400">@readmin803 · Lead Frontend & Technical SEO Engineer</p>
+                <h3 class="text-xl font-bold text-white">Raúl E.</h3>
+                <p class="text-xs font-mono text-cyan-400">@readmin803 · Fullstack · Automatización & Sistemas</p>
                 <p class="text-xs text-slate-400">Valencia / Remoto (Disponibilidad internacional)</p>
               </div>
             </div>
 
             <div class="space-y-4 text-xs font-mono border-t border-slate-800 pt-5">
               <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
-                <span class="text-slate-400">Especialidad Principal</span>
-                <span class="text-white font-semibold">Next.js 16, Sanity, n8n & PHP</span>
+                <span class="text-slate-400">Enfoque</span>
+                <span class="text-white font-semibold">Automatización · Web · Sistemas</span>
               </div>
               <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
-                <span class="text-slate-400">Control de Versiones</span>
-                <a href="https://github.com/readmin803" target="_blank" class="text-cyan-400 hover:underline">github.com/readmin803</a>
-              </div>
-              <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
-                <span class="text-slate-400">Despliegue & Hosting</span>
-                <span class="text-white font-semibold">Vercel / Docker / Cloud</span>
+                <span class="text-slate-400">Stack principal</span>
+                <span class="text-white font-semibold">n8n · Vue 3 · Nuxt 3 · Docker</span>
               </div>
               <div class="flex items-center justify-between py-1">
                 <span class="text-slate-400">Disponibilidad</span>

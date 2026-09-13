@@ -10,7 +10,8 @@ import {
   ChevronUp,
   Briefcase,
   Layers,
-  Sparkles
+  Sparkles,
+  BookOpen
 } from 'lucide-vue-next'
 
 const props = defineProps<{
@@ -28,9 +29,9 @@ const borderAccent = computed(() => {
   switch (props.project.category) {
     case 'n8n':
       return 'group-hover:border-emerald-500/50 hover:shadow-emerald-950/40'
-    case 'nextjs-seo':
+    case 'fullstack':
       return 'group-hover:border-cyan-500/50 hover:shadow-cyan-950/40'
-    case 'php':
+    case '2d-games':
       return 'group-hover:border-indigo-500/50 hover:shadow-indigo-950/40'
     default:
       return 'group-hover:border-slate-500/50 hover:shadow-slate-900/40'
@@ -41,9 +42,9 @@ const badgeTheme = computed(() => {
   switch (props.project.category) {
     case 'n8n':
       return 'emerald'
-    case 'nextjs-seo':
+    case 'fullstack':
       return 'cyan'
-    case 'php':
+    case '2d-games':
       return 'indigo'
     default:
       return 'slate'
@@ -92,6 +93,15 @@ const badgeTheme = computed(() => {
           <span>{{ project.role }}</span>
         </span>
       </div>
+
+      <!-- Image -->
+      <img
+        v-if="project.image"
+        :src="project.image"
+        :alt="project.title"
+        loading="lazy"
+        class="w-full h-44 sm:h-48 object-cover object-top rounded-xl mb-4 border border-slate-800/80"
+      />
 
       <!-- Title -->
       <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-200 mb-3 leading-snug">
@@ -220,6 +230,18 @@ const badgeTheme = computed(() => {
           </a>
 
           <a
+            v-if="project.readmeUrl"
+            :href="project.readmeUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all"
+            title="Leer documentación (README)"
+          >
+            <BookOpen class="w-3.5 h-3.5" />
+            <span>README</span>
+          </a>
+
+          <a
             v-if="project.demoUrl"
             :href="project.demoUrl"
             target="_blank"
@@ -228,7 +250,7 @@ const badgeTheme = computed(() => {
             title="Ver demo en vivo"
           >
             <ExternalLink class="w-3.5 h-3.5" />
-            <span>Demo</span>
+            <span>Probar</span>
           </a>
         </div>
       </div>

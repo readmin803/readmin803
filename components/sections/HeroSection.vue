@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import {
   ArrowDown,
-  Sparkles,
   Github,
-  FileDown,
-  Terminal,
-  Cpu,
   Workflow,
-  Search,
-  CheckCircle2
+  Code2,
+  Database
 } from 'lucide-vue-next'
 </script>
 
@@ -34,33 +30,33 @@ import {
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
             <span class="text-xs font-mono font-medium text-slate-300">
-              Raúl Engracia · <span class="text-cyan-400 font-semibold">[re]admin</span> · Lead Frontend & Technical SEO Engineer
+              Raúl E. · <span class="text-cyan-400 font-semibold">[re]admin</span> · Fullstack · Automatización & Sistemas
             </span>
           </div>
 
           <!-- Main headline -->
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
-            Automatizaciones con <span class="gradient-text-cyan">n8n</span>, páginas web ultra-optimizadas para <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">SEO & IA</span> y backend en <span class="gradient-text-purple">PHP</span>.
+            Automatizaciones, aplicaciones web y administración de sistemas.
           </h1>
 
           <!-- Subtitle / Bio -->
           <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            Hola, soy <strong class="text-white font-semibold">Raúl Engracia</strong>. Desarrollo soluciones técnicas integrales diseñadas para generar impacto real: ahorro masivo de horas operativas mediante automatizaciones, visibilidad orgánica en Google y motores de IA (GEO), y aplicaciones web robustas y escalables.
+            Diseño flujos con <strong class="text-white font-semibold">n8n</strong>, desarrollo aplicaciones con <strong class="text-white font-semibold">Vue 3</strong> y <strong class="text-white font-semibold">Nuxt 3</strong>, y administro bases de datos y servidores con <strong class="text-white font-semibold">Docker</strong>.
           </p>
 
           <!-- Core Value Badges -->
           <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2">
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
               <Workflow class="w-4 h-4 text-emerald-400" />
-              <span>Flujos Autónomos n8n</span>
+              <span>n8n · Automatizaciones</span>
             </div>
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
-              <Search class="w-4 h-4 text-cyan-400" />
-              <span>SEO Técnico & Motores IA (GEO)</span>
+              <Code2 class="w-4 h-4 text-cyan-400" />
+              <span>Vue 3 · Nuxt 3 · JavaScript ES6+</span>
             </div>
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
-              <Cpu class="w-4 h-4 text-indigo-400" />
-              <span>Aplicaciones Web PHP</span>
+              <Database class="w-4 h-4 text-indigo-400" />
+              <span>Docker · Bases de datos</span>
             </div>
           </div>
 
@@ -72,14 +68,6 @@ import {
             >
               <span>Ver Proyectos</span>
               <ArrowDown class="w-4 h-4" />
-            </a>
-
-            <a
-              href="#contacto"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-dark-900 hover:bg-dark-850 border border-slate-700/80 hover:border-slate-600 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <FileDown class="w-4 h-4 text-cyan-400" />
-              <span>Descargar CV</span>
             </a>
 
             <a
@@ -105,7 +93,7 @@ import {
                 <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
                 <span class="ml-2 text-slate-400">readmin@sysops:~</span>
               </div>
-              <span class="text-[11px] text-cyan-400/80 font-mono">v3.15 · Nuxt + Vercel</span>
+              <span class="text-[11px] text-cyan-400/80 font-mono">n8n · Nuxt · Docker</span>
             </div>
 
             <!-- Terminal Body -->
@@ -115,7 +103,7 @@ import {
                   <span class="text-emerald-400 font-semibold">$</span> whoami --profile
                 </p>
                 <p class="text-slate-200">
-                  <span class="text-cyan-400 font-bold">Raúl Engracia</span> ("readmin") · Lead Frontend & Technical SEO Engineer
+                  <span class="text-cyan-400 font-bold">Raúl E.</span> ("readmin") · Fullstack · Automatización & Sistemas
                 </p>
                 <p class="text-slate-400 text-xs">
                   GitHub: <a href="https://github.com/readmin803" target="_blank" class="text-indigo-400 underline hover:text-indigo-300">github.com/readmin803</a>
@@ -127,30 +115,23 @@ import {
                 <div class="flex items-center justify-between text-xs">
                   <span class="text-slate-400 flex items-center gap-1.5">
                     <Workflow class="w-3.5 h-3.5 text-emerald-400" />
-                    n8n Automatizaciones
+                    Automatizaciones
                   </span>
-                  <span class="text-emerald-400 font-semibold font-mono">100% Operativo</span>
+                  <span class="text-emerald-400 font-semibold font-mono">n8n · Webhooks</span>
                 </div>
                 <div class="flex items-center justify-between text-xs">
                   <span class="text-slate-400 flex items-center gap-1.5">
-                    <Sparkles class="w-3.5 h-3.5 text-cyan-400" />
-                    Next.js Core Web Vitals
+                    <Code2 class="w-3.5 h-3.5 text-cyan-400" />
+                    Desarrollo Web
                   </span>
-                  <span class="text-cyan-400 font-semibold font-mono">100 / 100 Speed</span>
+                  <span class="text-cyan-400 font-semibold font-mono">Vue 3 · Nuxt 3</span>
                 </div>
                 <div class="flex items-center justify-between text-xs">
                   <span class="text-slate-400 flex items-center gap-1.5">
-                    <Search class="w-3.5 h-3.5 text-amber-400" />
-                    Indexación IA (GEO)
+                    <Database class="w-3.5 h-3.5 text-indigo-400" />
+                    Sistemas & Datos
                   </span>
-                  <span class="text-amber-400 font-semibold font-mono">Schema JSON-LD</span>
-                </div>
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-400 flex items-center gap-1.5">
-                    <Cpu class="w-3.5 h-3.5 text-indigo-400" />
-                    PHP Backend & APIs
-                  </span>
-                  <span class="text-indigo-400 font-semibold font-mono">PHP 8.x Clean OOP</span>
+                  <span class="text-indigo-400 font-semibold font-mono">Docker · SQL</span>
                 </div>
               </div>
 
@@ -159,7 +140,7 @@ import {
                   <span class="text-emerald-400 font-semibold">$</span> echo $OBJECTIVE
                 </p>
                 <p class="text-slate-300 text-xs leading-relaxed bg-dark-950/60 p-2.5 rounded-lg border border-slate-800/50">
-                  "Crear software que resuelva problemas de negocio reales, elimine tareas manuales y ofrezca una experiencia web instantánea."
+                  "Resolver problemas de negocio con automatización, software y sistemas bien administrados."
                 </p>
               </div>
             </div>

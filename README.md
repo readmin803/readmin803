@@ -1,10 +1,10 @@
-# Portafolio Profesional · Raúl Engracia ([re]admin)
+# Portafolio Profesional · Raúl E. ([re]admin)
 
-> **Nick**: `readmin` (`re` = Raúl Engracia)  
-> **GitHub**: [@readmin803](https://github.com/readmin803)  
-> **Especialidades**: Automatizaciones n8n, Next.js (SEO & IA / GEO), PHP Moderno y Fullstack.
+> **Nick**: `readmin` (`re` = Raúl E.)
+> **GitHub**: [@readmin803](https://github.com/readmin803)
+> **Especialidades**: Nuxt 3, JavaScript (ES6+), Tailwind CSS, Nitro Engine, juegos 2D, automatizaciones n8n y SEO/GEO.
 
-Portafolio web interactivo de alto rendimiento construido con **Nuxt 3**, **Tailwind CSS**, **TypeScript** y **Lucide Icons**, optimizado para presentación a empresas y preparado para despliegue automático en **Vercel**.
+Portafolio web interactivo de alto rendimiento construido con **Nuxt 3**, **JavaScript (ES6+)**, **Tailwind CSS** y **Lucide Icons**, optimizado para presentación a empresas y preparado para despliegue automático en **Vercel**.
 
 ---
 
@@ -32,20 +32,17 @@ Portafolio web interactivo de alto rendimiento construido con **Nuxt 3**, **Tail
 
 ### 1. Añadir o editar Proyectos (`data/projects.ts`)
 Abre el archivo `data/projects.ts`. Cada proyecto es un objeto con la siguiente estructura:
-- `category`: `'n8n'` | `'nextjs-seo'` | `'php'` | `'fullstack'`
+- `category`: `'n8n'` | `'fullstack'` | `'2d-games'`
 - `title`: Título del proyecto o caso de estudio.
 - `shortDescription`: Resumen visible de un vistazo.
 - `fullDescription`: Explicación detallada (aparece al pulsar "Más detalles").
 - `highlights`: Logros técnicos o características clave con iconos de verificación.
-- `metrics`: Métricas de impacto (ej: `85% ahorro de tiempo`, `100/100 Lighthouse`).
-- `tags`: Etiquetas tecnológicas (`#n8n`, `#Next.js`, `#PHP8`, etc.).
+- `metrics`: Métricas de impacto (ej: `60 FPS estables`, `100/100 Lighthouse`).
+- `tags`: Etiquetas tecnológicas (`#Nuxt3`, `#JavaScriptES6`, `#PhaserJS`, etc.).
 - `githubUrl`: Enlace directo a tu repositorio de GitHub (ej: `https://github.com/readmin803/tu-repo`).
 - `demoUrl`: Enlace a la demo en vivo si está desplegada.
 
-### 2. Actualizar tu Currículum Vitae (CV)
-Reemplaza el archivo `public/cv-placeholder.pdf` con tu CV real en formato PDF manteniendo ese mismo nombre (o actualizando la ruta en `components/sections/ContactSection.vue`).
-
-### 3. Personalizar Correo de Contacto
+### 2. Personalizar Correo de Contacto
 En `components/sections/ContactSection.vue` y `components/layout/TheFooter.vue`, actualiza la variable `contactEmail` con tu dirección de correo electrónico real.
 
 ---

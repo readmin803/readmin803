@@ -18,32 +18,31 @@ useHead({
           {
             '@type': 'Person',
             '@id': 'https://readmin.dev/#person',
-            name: 'Raúl Engracia',
+            name: 'Raúl E.',
             alternateName: ['readmin', 'readmin803'],
-            jobTitle: 'Lead Frontend & Technical SEO Engineer',
-            description: 'Lead Frontend & Technical SEO Engineer, Ingeniero de Automatizaciones con n8n y Especialista en Arquitecturas Headless (Next.js 16, Sanity.io) y Generative Engine Optimization (GEO).',
+            jobTitle: 'Fullstack · Automatización & Sistemas',
+            description: 'Automatización de procesos con n8n, desarrollo web fullstack con Vue 3 y Nuxt 3, y administración de sistemas y bases de datos.',
             url: 'https://readmin.dev',
             sameAs: [
               'https://github.com/readmin803'
             ],
             knowsAbout: [
-              'Next.js 16 (App Router, SSR, SSG)',
-              'Sanity.io Headless CMS & Live Content API',
-              'Generative Engine Optimization (GEO)',
-              'Technical SEO & Core Web Vitals',
-              'JSON-LD Schema.org & Knowledge Graph',
-              'n8n Workflows and Automations',
-              'Nuxt.js',
-              'PHP Modern Development',
-              'REST APIs & Google OAuth',
-              'Vercel Deployment'
+              'n8n & Automatizaciones',
+              'Vue 3 (Composition API)',
+              'Nuxt 3 (SSR, SSG, Nitro Engine)',
+              'JavaScript (ES6+)',
+              'Tailwind CSS',
+              'REST APIs',
+              'Docker',
+              'Bases de datos (PostgreSQL / MySQL)',
+              'Phaser.js & PixiJS (2D Games)'
             ]
           },
           {
             '@type': 'WebSite',
             '@id': 'https://readmin.dev/#website',
             url: 'https://readmin.dev',
-            name: 'Raúl Engracia (readmin) - Portafolio Profesional',
+            name: 'Raúl E. (readmin) - Portafolio Profesional',
             publisher: {
               '@id': 'https://readmin.dev/#person'
             }

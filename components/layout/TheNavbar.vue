@@ -2,15 +2,19 @@
 import { ref } from 'vue'
 import {
   Github,
-  FileDown,
   Menu,
   X,
   Code2,
+  Mail,
+  ChevronDown,
+  Workflow,
+  Sparkles,
   Cpu,
-  Mail
+  FolderGit2
 } from 'lucide-vue-next'
 
 const isMobileMenuOpen = ref(false)
+const isProjectsOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -20,11 +24,14 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
+const projectsSubmenu = [
+  { label: 'Automatizaciones n8n', href: '#proyectos', icon: Workflow },
+  { label: 'Desarrollo Web', href: '#proyectos', icon: Sparkles },
+  { label: 'Juegos 2D', href: '#proyectos', icon: Cpu }
+]
+
 const navLinks = [
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'n8n & Flujos', href: '#proyectos' },
-  { label: 'Next.js & SEO', href: '#proyectos' },
-  { label: 'PHP', href: '#proyectos' },
+  { label: 'Proyectos', href: '#proyectos', hasSubmenu: true },
   { label: 'Stack Técnico', href: '#skills' },
   { label: 'Sobre Mí', href: '#sobre-mi' },
   { label: 'Contacto', href: '#contacto' }
@@ -45,21 +52,36 @@ const navLinks = [
               <span class="text-cyan-400 font-extrabold">[re]</span>admin
             </span>
             <span class="text-[11px] font-mono text-slate-400">
-              Raúl Engracia · @readmin803
+              Raúl E. · @readmin803
             </span>
           </div>
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <nav class="hidden md:flex items-center gap-1 lg:gap-2 relative">
           <a
             v-for="link in navLinks"
             :key="link.label"
             :href="link.href"
-            class="px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-900/60 rounded-lg transition-colors"
+            class="px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-900/60 rounded-lg transition-colors relative group"
           >
             {{ link.label }}
+            <component v-if="link.hasSubmenu" :is="ChevronDown" class="inline w-3 h-3 ml-1 align-middle" />
           </a>
+          <!-- Projects Submenu -->
+          <div
+            class="absolute top-full left-0 mt-2 w-56 bg-dark-900 border border-slate-800 rounded-xl shadow-xl shadow-black/40 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+          >
+            <a
+              v-for="item in projectsSubmenu"
+              :key="item.label"
+              :href="item.href"
+              class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors"
+            >
+              <component :is="item.icon" class="w-4 h-4" />
+              <span>{{ item.label }}</span>
+            </a>
+          </div>
         </nav>
 
         <!-- Right CTAs -->
@@ -73,15 +95,6 @@ const navLinks = [
             title="Ver GitHub @readmin803"
           >
             <Github class="w-5 h-5" />
-          </a>
-
-          <!-- Download CV Button -->
-          <a
-            href="#contacto"
-            class="inline-flex items-center gap-2 px-4 py-2 text-xs md:text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 rounded-lg shadow-sm shadow-cyan-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <FileDown class="w-4 h-4" />
-            <span>Descargar CV</span>
           </a>
         </div>
 
@@ -115,30 +128,42 @@ const navLinks = [
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div
-        v-if="isMobileMenuOpen"
-        class="md:hidden bg-dark-900/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl"
-      >
-        <a
-          v-for="link in navLinks"
-          :key="link.label"
-          :href="link.href"
-          @click="closeMobileMenu"
-          class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-slate-800/60"
+        <div
+          v-if="isMobileMenuOpen"
+          class="md:hidden bg-dark-900/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl"
         >
-          {{ link.label }}
-        </a>
-        <div class="pt-4 border-t border-slate-800 flex flex-col gap-3">
           <a
-            href="#contacto"
+            v-for="link in navLinks"
+            :key="link.label"
+            :href="link.href"
             @click="closeMobileMenu"
-            class="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-cyan-600 hover:bg-cyan-500 shadow-md shadow-cyan-600/30"
+            class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-slate-800/60"
           >
-            <FileDown class="w-4 h-4" />
-            <span>Descargar CV</span>
+            {{ link.label }}
           </a>
+          <!-- Mobile submenu for Projects -->
+          <div class="pl-4 pt-2 space-y-1.5">
+            <a
+              v-for="item in projectsSubmenu"
+              :key="item.label"
+              :href="item.href"
+              @click="closeMobileMenu"
+              class="flex items-center gap-2 block px-3 py-2 rounded-lg text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60"
+            >
+              <component :is="item.icon" class="w-4 h-4" />
+              {{ item.label }}
+            </a>
+          </div>
+          <div class="pt-4 border-t border-slate-800">
+            <a
+              href="https://github.com/readmin803"
+              @click="closeMobileMenu"
+              class="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-cyan-600 hover:bg-cyan-500 shadow-md shadow-cyan-600/30"
+            >
+              Ver GitHub @readmin803
+            </a>
+          </div>
         </div>
-      </div>
     </transition>
   </header>
 </template>

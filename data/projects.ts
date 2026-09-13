@@ -12,7 +12,7 @@ export interface ProjectItem {
   id: string
   title: string
   role?: string
-  category: 'n8n' | 'nextjs-seo' | 'php' | 'fullstack'
+  category: 'n8n' | 'fullstack' | '2d-games'
   categoryLabel: string
   badgeColor: 'emerald' | 'cyan' | 'indigo' | 'amber'
   shortDescription: string
@@ -22,210 +22,255 @@ export interface ProjectItem {
   tags: string[]
   githubUrl?: string
   demoUrl?: string
+  readmeUrl?: string
+  image?: string
   featured: boolean
   architectureNote?: string
   detailedSections?: DetailedSection[]
 }
 
 export const CATEGORIES = [
-  { id: 'all', label: 'Todos los proyectos', count: 6 },
-  { id: 'n8n', label: 'n8n & Automatizaciones', count: 2 },
-  { id: 'nextjs-seo', label: 'Next.js · SEO & IA (GEO)', count: 2 },
-  { id: 'php', label: 'PHP & Aplicaciones Web', count: 2 }
+  { id: 'all', label: 'Todos los proyectos', count: 5 },
+  { id: 'fullstack', label: 'Desarrollo Web', count: 2 },
+  { id: 'n8n', label: 'Automatizaciones n8n', count: 2 },
+  { id: '2d-games', label: 'Juegos 2D', count: 1 }
 ] as const
 
 export const PROJECTS: ProjectItem[] = [
-  // --- NEXT.JS + HEADLESS CMS + SEO TÉCNICO & GEO (FLAGSHIP PROJECT) ---
+  // --- WEB FULLSTACK ---
   {
-    id: 'real-estate-nextjs-sanity-geo',
-    title: 'Plataforma Inmobiliaria Internacional & Motor GEO con Next.js 16 y Sanity.io',
-    role: 'Lead Frontend & Technical SEO Engineer',
-    category: 'nextjs-seo',
-    categoryLabel: 'Next.js · SEO & IA (GEO)',
+    id: 'nuxt-enterprise-dashboard',
+    title: 'Dashboard unificado de datos operativos',
+    role: 'Desarrollador Fullstack',
+    category: 'fullstack',
+    categoryLabel: 'Desarrollo Web',
     badgeColor: 'cyan',
-    shortDescription: 'Desarrollo web integral, migración desde Replit a Next.js 16 (App Router), sincronización en tiempo real con Sanity.io Live Content API y optimización híbrida para Google y motores de IA (GEO).',
-    fullDescription: 'Liderazgo técnico en el diseño, desarrollo y posicionamiento orgánico de una plataforma inmobiliaria internacional enfocada en captación de inversores en Europa, Australia y Singapur. El proyecto unifica arquitectura frontend moderna en Next.js 16, gestión headless reactiva con Sanity.io, autenticación segura con Google OAuth y una estrategia avanzada de Generative Engine Optimization (GEO) y Knowledge Graph.',
+    shortDescription: 'Consolidé varias fuentes de datos externas en un único panel reactivo, eliminando la consulta manual de plataformas separadas.',
+    fullDescription: 'El equipo gestionaba datos repartidos entre varias plataformas y consultaba cada una por separado. Construí un dashboard en Nuxt 3 cuyas rutas de servidor (Nitro) agregan las APIs REST en una única respuesta normalizada. El cliente usa Vue 3 Composition API con estado centralizado, de modo que los datos se actualizan sin recargas completas.',
     highlights: [
-      'Migración de React (Replit) a Next.js 16 (App Router) con SSR/SSG e i18n para inversores globales (Europa, Australia, Singapur)',
-      'Arquitectura de datos relacionales en Sanity.io con sincronización bidireccional en tiempo real vía Live Content API',
-      'Optimización drástica de Core Web Vitals (LCP, INP, CLS) con next/image, next/font y precarga inteligente de recursos',
-      'Estrategia GEO (Generative Engine Optimization): JSON-LD avanzado, clústeres para Knowledge Graph y patrones Answer-First para ChatGPT/Perplexity'
+      'Rutas de servidor que consolidan 5 APIs REST en una respuesta normalizada',
+      'Estado centralizado con Composition API y componentes reutilizables',
+      'Manejo de errores y caching por fuente para evitar fallos en cascada'
     ],
     metrics: [
-      { label: 'Core Web Vitals', value: 'LCP / INP / CLS Top' },
-      { label: 'Mercados i18n', value: 'Europa · AUS · SG' },
-      { label: 'GEO Indexing', value: 'Answer-First AI' }
+      { label: 'Fuentes consolidadas', value: '5 → 1' },
+      { label: 'Recargas de página', value: 'Eliminadas' },
+      { label: 'Carga inicial', value: '< 1s' }
     ],
-    tags: [
-      'Next.js 16',
-      'TypeScript',
-      'Tailwind CSS',
-      'Sanity.io',
-      'Live Content API',
-      'Google OAuth',
-      'REST APIs',
-      'Google Maps API',
-      'JSON-LD Schema.org',
-      'GEO / LLM SEO',
-      'i18n'
-    ],
+    tags: ['Nuxt 3', 'Vue 3', 'JavaScript ES6+', 'Nitro', 'REST APIs', 'Tailwind CSS'],
     githubUrl: 'https://github.com/readmin803',
     demoUrl: '',
     featured: true,
-    architectureNote: 'Next.js 16 App Router + Sanity.io Live Content API + JSON-LD Knowledge Graph + Google OAuth',
+    architectureNote: 'Nuxt 3 + Nitro server routes + estado centralizado en Vue 3',
     detailedSections: [
       {
-        title: '🏗️ Arquitectura Frontend y Migración',
+        title: 'Problema y arquitectura',
         items: [
-          'Lideré la migración completa de un ecosistema React (alojado previamente en Replit) hacia una arquitectura moderna basada en Next.js 16 (App Router), implementando Server-Side Rendering (SSR) y Static Site Generation (SSG) para maximizar el rendimiento.',
-          'Desarrollé el sistema de internacionalización (i18n) multi-idioma mediante diccionarios de traducción, adaptando la plataforma para captar inversores en mercados clave de Europa, Australia y Singapur.',
-          'Optimicé drásticamente los Core Web Vitals (LCP, INP, CLS) mediante la refactorización de elementos nativos hacia componentes optimizados (next/image, next/font), carga diferida y precarga de recursos críticos.'
+          'Los datos vivían en cinco servicios distintos y el equipo alternaba entre pestañas para consolidarlos manualmente.',
+          'El servidor Nitro agrega y normaliza esas fuentes en un solo endpoint, aislando la complejidad de la integración.',
+          'El frontend consume una única API normalizada con estado centralizado en Composition API.'
         ]
       },
       {
-        title: '🔌 Integración Backend y Headless CMS',
+        title: 'Decisiones técnicas',
         items: [
-          'Diseñé e implementé la arquitectura de datos relacionales en Sanity.io (esquemas personalizados para propiedades, proyectos de inversión y artículos).',
-          'Desarrollé la sincronización bidireccional entre el CMS y el frontend utilizando la Live Content API de Sanity.',
-          'Configuré los endpoints de la API para los formularios de contacto, implementando autenticación segura mediante Google OAuth.',
-          'Integré enlaces y mapas dinámicos de Google Maps para la geolocalización precisa de los desarrollos inmobiliarios en Kuta Lombok.'
-        ]
-      },
-      {
-        title: '🤖 GEO (Generative Engine Optimization) y SEO Técnico',
-        items: [
-          'Diseñé e implementé una estrategia integral de rastreo y posicionamiento híbrido (Google Tradicional + Motores IA).',
-          'Desarrollé la generación dinámica de etiquetado semántico avanzado mediante JSON-LD Schema.org (incluyendo clústeres para RealEstateAgent, SingleFamilyResidence, Article y FAQPage), estructurando las entidades para el Knowledge Graph.',
-          'Automaticé la creación de metadatos dinámicos, imágenes Open Graph, sitemaps XML e implementé directivas de robots.txt para controlar el acceso del crawl budget y crawlers de LLMs.',
-          'Estructuré el contenido bajo patrones Answer-First para maximizar la tasa de extracción y co-citación en respuestas de IA generativa (ChatGPT Search, Perplexity, AI Overviews).'
+          'Caching por fuente con manejo de errores independiente: si una API falla, el resto del panel sigue funcionando.',
+          'Componentes reutilizables por dominio para evitar duplicación de lógica de presentación.',
+          'Actualización de datos en tiempo real sin recargar la página completa.'
         ]
       }
     ]
   },
 
-  // --- SAAS & LANDING DE ALTO RENDIMIENTO ---
   {
-    id: 'nextjs-saas-showcase',
-    title: 'Landing & Aplicación Web SaaS de Alto Rendimiento',
-    category: 'nextjs-seo',
-    categoryLabel: 'Next.js · SEO & IA (GEO)',
+    id: 'creative-portfolio-site',
+    title: 'Sitio corporativo de alto rendimiento',
+    category: 'fullstack',
+    categoryLabel: 'Desarrollo Web',
     badgeColor: 'cyan',
-    shortDescription: 'Arquitectura frontend moderna orientada a conversión de usuarios, carga instantánea y posicionamiento orgánico en búsquedas transaccionales.',
-    fullDescription: 'Sitio web corporativo y panel interactivo con animaciones sutiles, carga diferida de scripts, optimización de fuentes e imágenes con formato AVIF/WebP. Incluye integración analítica respetuosa con la privacidad y pruebas A/B de páginas de aterrizaje.',
+    shortDescription: 'Renderizado híbrido por ruta para combinar velocidad de carga con visibilidad orgánica en buscadores.',
+    fullDescription: 'El objetivo era una web que cargara en menos de un segundo sin sacrificar posicionamiento. Apliqué renderizado híbrido con Nuxt 3 (SSR para contenido indexable, SSG para páginas estáticas), optimicé imágenes y fuentes, y ajusté los Core Web Vitals hasta métricas en verde.',
     highlights: [
-      'Carga diferida inteligente y priorización crítica de recursos (Fetch Priority)',
-      'Estrategia de metadatos dinámicos por ruta para snippets enriquecidos en Google',
-      'Diseño responsive adaptativo con soporte para temas oscuro y claro nativo'
+      'Renderizado híbrido SSR/SSG elegido por ruta según el objetivo de cada página',
+      'Core Web Vitals en verde (LCP, INP, CLS)',
+      'Datos estructurados JSON-LD para buscadores y motores de IA'
     ],
     metrics: [
-      { label: 'First Contentful Paint', value: '0.4s' },
-      { label: 'Tasa de rebote', value: '-35%' },
-      { label: 'Conversión móvil', value: '+42%' }
+      { label: 'LCP', value: '< 1s' },
+      { label: 'CLS', value: '0' },
+      { label: 'SEO', value: '100/100' }
     ],
-    tags: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Lucide', 'Edge Functions', 'SEO On-Page'],
+    tags: ['Nuxt 3', 'SSR/SSG', 'Core Web Vitals', 'JSON-LD', 'JavaScript ES6+', 'Tailwind CSS'],
     githubUrl: 'https://github.com/readmin803',
     demoUrl: '',
     featured: false,
-    architectureNote: 'Arquitectura headless desacoplada con SSR y componentes React optimizados'
+    architectureNote: 'Renderizado híbrido con Nuxt 3 + optimización de Core Web Vitals',
+    detailedSections: [
+      {
+        title: 'Rendimiento y SEO',
+        items: [
+          'Renderizado híbrido: SSR para páginas que necesitan indexación y SSG para contenido estático.',
+          'Optimización de imágenes, fuentes y recursos críticos para Core Web Vitals en verde.',
+          'JSON-LD estructurado para que el contenido sea legible por Google y motores de IA.'
+        ]
+      }
+    ]
   },
 
-  // --- AUTOMATIZACIONES Y FLUJOS CON N8N ---
+  // --- AUTOMATIZACIONES N8N ---
   {
-    id: 'n8n-lead-intelligence',
-    title: 'Pipeline Autónomo de Enriquecimiento y Cualificación de Leads con n8n & LLMs',
+    id: 'n8n-automation',
+    title: 'Automatización de procesos con n8n',
+    role: 'Desarrollador de automatizaciones',
     category: 'n8n',
-    categoryLabel: 'n8n & Automatizaciones',
+    categoryLabel: 'Automatizaciones n8n',
     badgeColor: 'emerald',
-    shortDescription: 'Sistema end-to-end de recepción de webhooks, enriquecimiento inteligente con APIs de IA y sincronización en tiempo real con CRM y canales corporativos.',
-    fullDescription: 'Flujo de trabajo de alta disponibilidad diseñado en n8n self-hosted para procesar eventos en tiempo real. Captura leads desde formularios web mediante webhooks autenticados, valida y normaliza datos, consulta APIs externas de enriquecimiento empresarial y ejecuta clasificación semántica mediante modelos de IA para asignar automáticamente puntuación (lead scoring) y alertar al equipo comercial.',
+    shortDescription: 'Flujos que conectan las aplicaciones de un negocio para que trabajen solas, eliminando las tareas manuales de copiar y pegar.',
+    fullDescription: 'Con n8n conecto las herramientas que ya usa un negocio para que se comuniquen entre sí sin intervención humana. Un ejemplo típico: cuando llega un formulario web, el flujo recoge los datos, los guarda donde corresponde (base de datos, hoja de cálculo o CRM) y avisa al equipo por correo o Slack. Todo ocurre automáticamente y, si algún servicio falla, el flujo reintenta para no perder nada.',
     highlights: [
-      'Gestión robusta de reintentos (retry on fail) y dead-letter queues',
-      'Integración fluida con modelos OpenAI / Claude para clasificación de intenciones',
-      'Despliegue contenerizado en Docker con volumen persistente y monitorización'
+      'Conexión entre aplicaciones mediante webhooks y APIs',
+      'Notificaciones automáticas al equipo (email, Slack, Telegram)',
+      'Reintentos automáticos cuando un servicio falla'
     ],
     metrics: [
-      { label: 'Tiempo de respuesta', value: '< 1.8s' },
-      { label: 'Ahorro de gestión manual', value: '85%' },
-      { label: 'Uptime del flujo', value: '99.9%' }
+      { label: 'Ejecución', value: 'Automática 24/7' },
+      { label: 'Tareas manuales', value: 'Eliminadas' },
+      { label: 'Fallos', value: 'Reintentos automáticos' }
     ],
-    tags: ['n8n', 'Webhooks', 'Docker', 'AI APIs', 'PostgreSQL', 'Slack API'],
+    tags: ['n8n', 'Webhooks', 'APIs REST', 'Notificaciones', 'Automatización'],
     githubUrl: 'https://github.com/readmin803',
     demoUrl: '',
     featured: true,
-    architectureNote: 'Docker compose con n8n, worker redis y webhook reverse proxy con SSL'
-  },
-  {
-    id: 'n8n-multi-sync-engine',
-    title: 'Motor de Sincronización Bidireccional de Inventario y Pedidos',
-    category: 'n8n',
-    categoryLabel: 'n8n & Automatizaciones',
-    badgeColor: 'emerald',
-    shortDescription: 'Automatización crítica para sincronizar catálogos, stock y estados de pedidos entre múltiples plataformas de venta y bases de datos centrales.',
-    fullDescription: 'Orquestación de micro-flujos en n8n que unifica la gestión de existencias entre tiendas online y ERP central. Incluye control de concurrencia, balanceo de rate-limits en APIs REST de terceros y notificaciones instantáneas ante discrepancias o roturas de stock.',
-    highlights: [
-      'Mapeo dinámico de esquemas JSON con transformaciones JavaScript nativas en n8n',
-      'Control estricto de concurrencia para evitar condiciones de carrera en ventas simultáneas',
-      'Generación de logs centralizados y alertas proactivas a través de Telegram/Discord bots'
-    ],
-    metrics: [
-      { label: 'Sincronización de stock', value: 'Tiempo real' },
-      { label: 'Discrepancias eliminadas', value: '100%' },
-      { label: 'Eventos diarios procesados', value: '+12,000' }
-    ],
-    tags: ['n8n', 'REST APIs', 'Webhooks', 'JSON Data Mapper', 'MySQL', 'Telegram Bot'],
-    githubUrl: 'https://github.com/readmin803',
-    demoUrl: '',
-    featured: false,
-    architectureNote: 'Orquestador de cron triggers + webhooks para consistencia eventual'
+    architectureNote: 'n8n + webhooks + APIs REST + notificaciones',
+    detailedSections: [
+      {
+        title: 'Qué es y cómo funciona',
+        items: [
+          'Un evento de entrada (formulario, correo o webhook) dispara el flujo automáticamente.',
+          'El flujo recoge los datos, los valida y los transforma antes de enviarlos a los servicios de destino.',
+          'Cada paso tiene reintentos automáticos: si una API falla, el flujo lo vuelve a intentar sin perder datos.'
+        ]
+      },
+      {
+        title: 'Para qué sirve en un negocio',
+        items: [
+          'Sustituye las tareas manuales de mover datos entre aplicaciones.',
+          'Avisa al equipo en tiempo real cuando ocurre algo relevante.',
+          'Mantiene sincronizadas varias herramientas sin que nadie tenga que hacerlo a mano.'
+        ]
+      }
+    ]
   },
 
-  // --- PHP Y APLICACIONES WEB ---
   {
-    id: 'php-enterprise-crm',
-    title: 'Plataforma Web de Gestión Empresarial y Administración en PHP',
-    category: 'php',
-    categoryLabel: 'PHP & Aplicaciones Web',
-    badgeColor: 'indigo',
-    shortDescription: 'Sistema web robusto con arquitectura MVC modular, gestión integral de clientes, facturación y control granular de roles y permisos.',
-    fullDescription: 'Aplicación web empresarial desarrollada en PHP moderno con orientación a objetos (OOP) estricta, arquitectura desacoplada y base de datos relacional optimizada con índices y transacciones ACID. Incluye generación de reportes PDF bajo demanda, auditoría de cambios y autenticación segura con JWT y protección CSRF/XSS.',
+    id: 'n8n-printer-billing',
+    title: 'Sistema Automatizado de Lectura y Facturación de Impresoras (B2B)',
+    role: 'Desarrollador de automatizaciones',
+    category: 'n8n',
+    categoryLabel: 'Automatizaciones n8n',
+    badgeColor: 'emerald',
+    shortDescription: 'Pipeline que procesa automáticamente los emails de unas 40 impresoras, extrae los contadores de impresión y genera los registros listos para facturar por cliente.',
+    fullDescription: 'Las impresoras industriales envían cada mes emails con datos de impresión desestructurados. El pipeline de n8n captura esos correos, extrae el número de serie, la fecha y los contadores de copias (blanco/negro y color) mediante parseo con JavaScript, cruza cada número de serie contra la base de datos de clientes (NocoDB/PostgreSQL) para asociarlo a su tarifa, y consolida las lecturas listas para calcular la facturación.',
     highlights: [
-      'Arquitectura MVC limpia siguiendo principios SOLID y patrones de diseño (Repository, Service)',
-      'Panel de control reactivo con filtros avanzados, exportación de datos y dashboards visuales',
-      'Módulo de roles y permisos granulares (RBAC) para diferentes niveles de usuario'
+      'Recepción automática de emails de impresoras y extracción de variables con regex',
+      'Cruce de números de serie contra NocoDB para asociar cliente y tarifa',
+      'Consolidación de lecturas lista para el cálculo de facturación'
     ],
     metrics: [
-      { label: 'PHP Version', value: '8.x Modern' },
-      { label: 'Transacciones/seg', value: 'Alta concurrencia' },
-      { label: 'Seguridad', value: 'A+ Audit' }
+      { label: 'Trabajo manual', value: '-100%' },
+      { label: 'Errores', value: '0' },
+      { label: 'Proceso', value: 'Automatizado' }
     ],
-    tags: ['PHP 8', 'MVC', 'MySQL', 'REST API', 'JavaScript', 'Bootstrap / Tailwind', 'Docker'],
+    tags: ['n8n', 'NocoDB', 'Node.js', 'REST APIs', 'Email Webhooks', 'PostgreSQL'],
     githubUrl: 'https://github.com/readmin803',
     demoUrl: '',
+    image: '/n8n-imp-gestion.jpeg',
     featured: true,
-    architectureNote: 'Diseño en capas (Domain, Infrastructure, Presentation) con Composer'
+    architectureNote: 'n8n + email trigger + parseo JS + NocoDB/PostgreSQL + consolidación',
+    detailedSections: [
+      {
+        title: 'Problema de negocio',
+        items: [
+          'Cada mes llegan unos 40 emails de impresoras industriales con lecturas de contadores en texto sin estructura.',
+          'El equipo transcribía manualmente cada lectura y calculaba la factura de cada cliente.',
+          'El proceso era lento y propenso a errores en la asignación de lecturas al cliente correcto.'
+        ]
+      },
+      {
+        title: 'Arquitectura de automatización',
+        items: [
+          'n8n recibe los emails automáticamente y dispara el flujo.',
+          'Un nodo de JavaScript parsea el contenido y extrae número de serie, fecha y contadores (blanco/negro y color).',
+          'El flujo cruza el número de serie contra NocoDB (PostgreSQL) para asociar cliente y tarifa.',
+          'Las lecturas validadas se consolidan en registros listos para la facturación.'
+        ]
+      },
+      {
+        title: 'Impacto',
+        items: [
+          'Eliminación del 100% del trabajo manual de transcripción.',
+          'Cero errores en la asignación de lecturas por cliente.',
+          'Facturación calculada directamente a partir de lecturas consolidadas.'
+        ]
+      }
+    ]
   },
+
+  // --- JUEGOS ---
   {
-    id: 'php-legacy-refactor-api',
-    title: 'Refactorización y API REST de Alto Rendimiento en PHP',
-    category: 'php',
-    categoryLabel: 'PHP & Aplicaciones Web',
+    id: 'play-chibi',
+    title: 'Play Chibi — juego 2D top-down surrealista',
+    category: '2d-games',
+    categoryLabel: 'Juegos 2D',
     badgeColor: 'indigo',
-    shortDescription: 'Modernización de un sistema legado a PHP 8.x con creación de capa API REST para consumo frontend y clientes móviles.',
-    fullDescription: 'Proyecto de ingeniería de software enfocado en la migración de código monolítico antiguo a una arquitectura limpia basada en estándares PSR. Implementación de una API RESTful documentada con Swagger/OpenAPI, middleware de autenticación por tokens y caché de consultas con Redis.',
+    shortDescription: 'Juego web 2D top-down con Phaser 3: controlas una pluma mística, recoges auras de energía y escapas por el portal esquivando monstruos.',
+    fullDescription: 'Juego 2D top-down minimalista y surrealista desarrollado con Phaser 3 sin bundler. El jugador controla una pluma mística cuyo aura crece al recoger "roscos de aura"; la misión es completar la recogida y escapar por un portal esquivando enemigos con movimiento tipo caballo de ajedrez. La dificultad escala por niveles de forma infinita.',
     highlights: [
-      'Migración segura sin tiempo de inactividad garantizando retrocompatibilidad de datos',
-      'Incorporación de capa de validación de entradas estrictas y control global de excepciones',
-      'Optimización de consultas SQL complejas reduciendo tiempos de carga de base de datos en un 60%'
+      'Phaser 3.80 por CDN (import map), JavaScript ES Modules, sin bundler',
+      'Físicas Arcade, texturas procedurales y render Canvas/WebGL automático',
+      'Controles duales: joystick táctil + teclado (WASD/flechas), con área segura para iPhone',
+      'Escenas modulares (Boot → Preload → Game + UI) con bus de eventos',
+      'Dificultad progresiva infinita configurada por niveles'
     ],
     metrics: [
-      { label: 'Tiempo de consulta SQL', value: '-60%' },
-      { label: 'Compatibilidad', value: 'PSR-12 / PSR-7' },
-      { label: 'Disponibilidad en migración', value: '100%' }
+      { label: 'Motor', value: 'Phaser 3' },
+      { label: 'Controles', value: 'Táctil + teclado' },
+      { label: 'Despliegue', value: 'Vercel' }
     ],
-    tags: ['PHP 8', 'RESTful API', 'Redis Cache', 'PDO MySQL', 'Swagger / OpenAPI', 'Unit Testing'],
-    githubUrl: 'https://github.com/readmin803',
-    demoUrl: '',
-    featured: false,
-    architectureNote: 'Capa de abstracción con repositorios y contratos de interfaz'
+    tags: ['Phaser 3', 'JavaScript ES modules', 'Arcade Physics', 'Canvas/WebGL', 'Responsive'],
+    githubUrl: 'https://github.com/readmin803/play-chibi',
+    demoUrl: 'https://play-chibi.vercel.app',
+    readmeUrl: 'https://github.com/readmin803/play-chibi/blob/main/README.md',
+    featured: true,
+    architectureNote: 'Phaser 3 + físicas Arcade + escenas modulares (sin bundler)',
+    detailedSections: [
+      {
+        title: 'Mecánicas del juego',
+        items: [
+          'El aura de la pluma crece y brilla con cada rosco recogido (setGlowLevel = recogidas / total).',
+          'Al recoger la última aura se abre el portal: el mapa se ilumina y aparece el aviso "¡SALIDA ABIERTA!".',
+          'Los enemigos se mueven en "L" tipo caballo de ajedrez, con orientación aleatoria y pausas.',
+          'El portal es un vórtice que atrae al jugador; al tocarlo se completa el nivel.',
+          'Tres corazones de vida; al morir muestra "GAME OVER!".'
+        ]
+      },
+      {
+        title: 'Controles y responsive',
+        items: [
+          'Joystick virtual abajo a la izquierda, siempre visible, que se recoloca bajo el dedo al arrastrar.',
+          'En escritorio funciona con WASD o flechas, y también con el ratón.',
+          'Scale.RESIZE adapta el juego a vertical y horizontal, con insets de área segura para el notch de iPhone.'
+        ]
+      },
+      {
+        title: 'Arquitectura del código',
+        items: [
+          'Escenas modulares: BootScene → PreloadScene → GameScene (+ UIScene en paralelo).',
+          'Objetos separados por dominio: Player, Enemy, Collectible y Portal.',
+          'Bus global de eventos entre escenas y texturas procedurales generadas por código.',
+          'Dificultad configurable en config.js con misiones que escalan sin límite.'
+        ]
+      }
+    ]
   }
 ]

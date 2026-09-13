@@ -23,9 +23,9 @@ const getCategoryIcon = (id: string) => {
   switch (id) {
     case 'n8n':
       return Workflow
-    case 'nextjs-seo':
+    case 'fullstack':
       return Sparkles
-    case 'php':
+    case '2d-games':
       return Cpu
     default:
       return Filter
@@ -49,11 +49,11 @@ const getCategoryIcon = (id: string) => {
         </div>
 
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Proyectos técnicos preparados para aportar valor desde el día uno
+          Problemas reales, arquitectura clara y resultados medibles
         </h2>
 
         <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
-          Explora los proyectos divididos en mis tres pilares de especialización: automatizaciones autónomas con <strong class="text-slate-200 font-semibold">n8n</strong>, desarrollo frontend en <strong class="text-slate-200 font-semibold">Next.js</strong> optimizado para SEO e IA, y aplicaciones web empresariales en <strong class="text-slate-200 font-semibold">PHP</strong>.
+          Cada proyecto describe el problema que resuelve, las decisiones de arquitectura y las métricas obtenidas.
         </p>
 
         <!-- Category Filter Tabs -->
@@ -95,7 +95,7 @@ const getCategoryIcon = (id: string) => {
       <!-- Bottom Note for Recruiters / Companies -->
       <div class="mt-16 p-6 rounded-2xl bg-dark-900/60 border border-slate-800/80 text-center max-w-2xl mx-auto">
         <p class="text-sm text-slate-300 mb-3">
-          ¿Buscas una solución a medida o deseas revisar el código fuente completo y los flujos exportados?
+          ¿Buscas una solución a medida o quieres revisar el código fuente y los flujos?
         </p>
         <div class="flex items-center justify-center gap-4">
           <a

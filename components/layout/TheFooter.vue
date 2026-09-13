@@ -17,11 +17,11 @@ const currentYear = new Date().getFullYear()
             <span class="text-xs text-slate-500 font-mono">/ readmin803</span>
           </div>
           <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
-            Raúl Engracia. Portafolio técnico orientado a impacto: automatizaciones con n8n, frontend Next.js de máximo rendimiento (SEO & GEO), y aplicaciones empresariales en PHP.
+            Raúl E. Automatización con n8n, desarrollo web fullstack y administración de sistemas y bases de datos.
           </p>
           <div class="flex items-center gap-2 pt-2">
             <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              Vercel Ready
+              n8n & Docker
             </span>
             <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
               Nuxt 3 + Tailwind
@@ -31,34 +31,24 @@ const currentYear = new Date().getFullYear()
 
         <!-- Navigation shortcuts -->
         <div class="space-y-3">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-300 font-mono">Apartados</h4>
-          <ul class="space-y-2 text-sm text-slate-400">
-            <li>
-              <a href="#proyectos" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                Automatizaciones n8n
-              </a>
-            </li>
-            <li>
-              <a href="#proyectos" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                Next.js & Optimización SEO / GEO
-              </a>
-            </li>
-            <li>
-              <a href="#proyectos" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                Desarrollo Backend PHP
-              </a>
-            </li>
-            <li>
-              <a href="#skills" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                Stack Tecnológico
-              </a>
-            </li>
-            <li>
-              <a href="#sobre-mi" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                Sobre Raúl Engracia
-              </a>
-            </li>
-          </ul>
+<h4 class="text-sm font-semibold uppercase tracking-wider text-slate-300 font-mono">Secciones</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+              <li>
+                <a href="#proyectos" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
+                  Todos los Proyectos
+                </a>
+              </li>
+              <li>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
+                  Stack Tecnológico
+                </a>
+              </li>
+              <li>
+                <a href="#sobre-mi" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
+                  Sobre Raúl E.
+                </a>
+              </li>
+            </ul>
         </div>
 
         <!-- Social and contact -->
@@ -92,7 +82,7 @@ const currentYear = new Date().getFullYear()
 
       <!-- Bottom footer -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-        <p>© {{ currentYear }} Raúl Engracia (readmin). Todos los derechos reservados.</p>
+        <p>© {{ currentYear }} Raúl E. (readmin). Todos los derechos reservados.</p>
         <p class="flex items-center gap-1">
           Construido con enfoque en rendimiento, arquitectura limpia y código escalable.
         </p>
