@@ -89,7 +89,7 @@ import {
               </div>
               <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
                 <span class="text-slate-400">Stack principal</span>
-                <span class="text-white font-semibold">n8n · Vue 3 · Nuxt 3 · Docker</span>
+                <span class="text-white font-semibold">Vue 3 · Nuxt 3 · PHP · SQL · n8n</span>
               </div>
               <div class="flex items-center justify-between py-1">
                 <span class="text-slate-400">Disponibilidad</span>

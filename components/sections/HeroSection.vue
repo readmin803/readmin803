@@ -4,7 +4,8 @@ import {
   Github,
   Workflow,
   Code2,
-  Database
+  Database,
+  Server
 } from 'lucide-vue-next'
 </script>
 
@@ -41,22 +42,22 @@ import {
 
           <!-- Subtitle / Bio -->
           <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            Diseño flujos con <strong class="text-white font-semibold">n8n</strong>, desarrollo aplicaciones con <strong class="text-white font-semibold">Vue 3</strong> y <strong class="text-white font-semibold">Nuxt 3</strong>, y administro bases de datos y servidores con <strong class="text-white font-semibold">Docker</strong>.
+            Desarrollo aplicaciones completas con <strong class="text-white font-semibold">Vue 3</strong> y <strong class="text-white font-semibold">Nuxt 3</strong>, trabajo con backend en <strong class="text-white font-semibold">Node.js</strong>, <strong class="text-white font-semibold">PHP</strong> y <strong class="text-white font-semibold">Python</strong>, y automatizo procesos e integraciones con <strong class="text-white font-semibold">n8n</strong>.
           </p>
 
           <!-- Core Value Badges -->
           <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2">
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
-              <Workflow class="w-4 h-4 text-emerald-400" />
-              <span>n8n · Automatizaciones</span>
-            </div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
               <Code2 class="w-4 h-4 text-cyan-400" />
               <span>Vue 3 · Nuxt 3 · JavaScript ES6+</span>
             </div>
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
-              <Database class="w-4 h-4 text-indigo-400" />
-              <span>Docker · Bases de datos</span>
+              <Server class="w-4 h-4 text-indigo-400" />
+              <span>Node.js · PHP · Python · SQL</span>
+            </div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300">
+              <Workflow class="w-4 h-4 text-emerald-400" />
+              <span>APIs REST · n8n</span>
             </div>
           </div>
 
