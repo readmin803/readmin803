@@ -20,7 +20,7 @@ const variantClasses = computed(() => {
       return 'bg-amber-500/10 text-amber-300 border-amber-500/30'
     case 'slate':
     default:
-      return 'bg-slate-800/70 text-slate-300 border-slate-700/60'
+      return 'bg-slate-200/70 text-slate-700 border-slate-300/60'
   }
 })
 </script>

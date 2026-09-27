@@ -39,50 +39,6 @@ export const CATEGORIES = [
 export const PROJECTS: ProjectItem[] = [
   // --- WEB FULLSTACK ---
   {
-    id: 'nuxt-enterprise-dashboard',
-    title: 'Dashboard unificado de datos operativos',
-    role: 'Desarrollador Fullstack',
-    category: 'fullstack',
-    categoryLabel: 'Desarrollo Web',
-    badgeColor: 'cyan',
-    shortDescription: 'Consolidé varias fuentes de datos externas en un único panel reactivo, eliminando la consulta manual de plataformas separadas.',
-    fullDescription: 'El equipo gestionaba datos repartidos entre varias plataformas y consultaba cada una por separado. Construí un dashboard en Nuxt 3 cuyas rutas de servidor (Nitro) agregan las APIs REST en una única respuesta normalizada. El cliente usa Vue 3 Composition API con estado centralizado, de modo que los datos se actualizan sin recargas completas.',
-    highlights: [
-      'Rutas de servidor que consolidan 5 APIs REST en una respuesta normalizada',
-      'Estado centralizado con Composition API y componentes reutilizables',
-      'Manejo de errores y caching por fuente para evitar fallos en cascada'
-    ],
-    metrics: [
-      { label: 'Fuentes consolidadas', value: '5 → 1' },
-      { label: 'Recargas de página', value: 'Eliminadas' },
-      { label: 'Carga inicial', value: '< 1s' }
-    ],
-    tags: ['Nuxt 3', 'Vue 3', 'JavaScript ES6+', 'Nitro', 'REST APIs', 'Tailwind CSS'],
-    githubUrl: 'https://github.com/readmin803',
-    demoUrl: '',
-    featured: true,
-    architectureNote: 'Nuxt 3 + Nitro server routes + estado centralizado en Vue 3',
-    detailedSections: [
-      {
-        title: 'Problema y arquitectura',
-        items: [
-          'Los datos vivían en cinco servicios distintos y el equipo alternaba entre pestañas para consolidarlos manualmente.',
-          'El servidor Nitro agrega y normaliza esas fuentes en un solo endpoint, aislando la complejidad de la integración.',
-          'El frontend consume una única API normalizada con estado centralizado en Composition API.'
-        ]
-      },
-      {
-        title: 'Decisiones técnicas',
-        items: [
-          'Caching por fuente con manejo de errores independiente: si una API falla, el resto del panel sigue funcionando.',
-          'Componentes reutilizables por dominio para evitar duplicación de lógica de presentación.',
-          'Actualización de datos en tiempo real sin recargar la página completa.'
-        ]
-      }
-    ]
-  },
-
-  {
     id: 'creative-portfolio-site',
     title: 'Sitio corporativo de alto rendimiento',
     category: 'fullstack',
@@ -118,50 +74,6 @@ export const PROJECTS: ProjectItem[] = [
   },
 
   // --- AUTOMATIZACIONES N8N ---
-  {
-    id: 'n8n-automation',
-    title: 'Automatización de procesos con n8n',
-    role: 'Desarrollador de automatizaciones',
-    category: 'n8n',
-    categoryLabel: 'Automatizaciones n8n',
-    badgeColor: 'emerald',
-    shortDescription: 'Flujos que conectan las aplicaciones de un negocio para que trabajen solas, eliminando las tareas manuales de copiar y pegar.',
-    fullDescription: 'Con n8n conecto las herramientas que ya usa un negocio para que se comuniquen entre sí sin intervención humana. Un ejemplo típico: cuando llega un formulario web, el flujo recoge los datos, los guarda donde corresponde (base de datos, hoja de cálculo o CRM) y avisa al equipo por correo o Slack. Todo ocurre automáticamente y, si algún servicio falla, el flujo reintenta para no perder nada.',
-    highlights: [
-      'Conexión entre aplicaciones mediante webhooks y APIs',
-      'Notificaciones automáticas al equipo (email, Slack, Telegram)',
-      'Reintentos automáticos cuando un servicio falla'
-    ],
-    metrics: [
-      { label: 'Ejecución', value: 'Automática 24/7' },
-      { label: 'Tareas manuales', value: 'Eliminadas' },
-      { label: 'Fallos', value: 'Reintentos automáticos' }
-    ],
-    tags: ['n8n', 'Webhooks', 'APIs REST', 'Notificaciones', 'Automatización'],
-    githubUrl: 'https://github.com/readmin803',
-    demoUrl: '',
-    featured: true,
-    architectureNote: 'n8n + webhooks + APIs REST + notificaciones',
-    detailedSections: [
-      {
-        title: 'Qué es y cómo funciona',
-        items: [
-          'Un evento de entrada (formulario, correo o webhook) dispara el flujo automáticamente.',
-          'El flujo recoge los datos, los valida y los transforma antes de enviarlos a los servicios de destino.',
-          'Cada paso tiene reintentos automáticos: si una API falla, el flujo lo vuelve a intentar sin perder datos.'
-        ]
-      },
-      {
-        title: 'Para qué sirve en un negocio',
-        items: [
-          'Sustituye las tareas manuales de mover datos entre aplicaciones.',
-          'Avisa al equipo en tiempo real cuando ocurre algo relevante.',
-          'Mantiene sincronizadas varias herramientas sin que nadie tenga que hacerlo a mano.'
-        ]
-      }
-    ]
-  },
-
   {
     id: 'n8n-printer-billing',
     title: 'Sistema Automatizado de Lectura y Facturación de Impresoras (B2B)',
@@ -241,6 +153,7 @@ export const PROJECTS: ProjectItem[] = [
     githubUrl: 'https://github.com/readmin803/play-chibi',
     demoUrl: 'https://play-chibi.vercel.app',
     readmeUrl: 'https://github.com/readmin803/play-chibi/blob/main/README.md',
+    image: '/chibi.webp',
     featured: true,
     architectureNote: 'Phaser 3 + físicas Arcade + escenas modulares (sin bundler)',
     detailedSections: [

@@ -37,7 +37,7 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'readmin - Raúl E.' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Raúl E. (readmin) · Portafolio Profesional' },
-        { name: 'theme-color', content: '#090d16' }
+        { name: 'theme-color', content: '#0ea5e9' }
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

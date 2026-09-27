@@ -37,7 +37,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
     items: [
       'APIs REST',
       'n8n',
-      'Automatización de procesos',
       'Optimización de rendimiento'
     ]
   }

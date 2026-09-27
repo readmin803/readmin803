@@ -3,8 +3,6 @@ import TheNavbar from '~/components/layout/TheNavbar.vue'
 import TheFooter from '~/components/layout/TheFooter.vue'
 import HeroSection from '~/components/sections/HeroSection.vue'
 import ProjectsSection from '~/components/sections/ProjectsSection.vue'
-import SkillsSection from '~/components/sections/SkillsSection.vue'
-import AboutSection from '~/components/sections/AboutSection.vue'
 import ContactSection from '~/components/sections/ContactSection.vue'
 
 // Schema.org Structured Data for Search Engines & Generative AI Engines (GEO)
@@ -20,29 +18,29 @@ useHead({
             '@id': 'https://readmin.dev/#person',
             name: 'Raúl E.',
             alternateName: ['readmin', 'readmin803'],
-            jobTitle: 'Fullstack · Automatización & Sistemas',
-            description: 'Automatización de procesos con n8n, desarrollo web fullstack con Vue 3 y Nuxt 3, y administración de sistemas y bases de datos.',
+            jobTitle: 'Sistemas · Automatización & Desarrollo Web',
+            description: 'Administración ERP Navision, Windows Server, soporte técnico y desarrollo de software a medida con PHP, MySQL, JavaScript, Node.js y Nuxt 3.',
             url: 'https://readmin.dev',
             sameAs: [
               'https://github.com/readmin803'
             ],
             knowsAbout: [
+              'Microsoft Dynamics NAV (Navision)',
+              'Zebra ZPL',
+              'Windows Server (RDP)',
+              'Soporte Técnico y Helpdesk',
+              'Vue 3 & Nuxt 3',
+              'PHP & MySQL',
+              'JavaScript (ES6+) & Node.js',
               'n8n & Automatizaciones',
-              'Vue 3 (Composition API)',
-              'Nuxt 3 (SSR, SSG, Nitro Engine)',
-              'JavaScript (ES6+)',
-              'Tailwind CSS',
-              'REST APIs',
-              'Docker',
-              'Bases de datos (PostgreSQL / MySQL)',
-              'Phaser.js & PixiJS (2D Games)'
+              'Redes & Virtualización (VMware / Proxmox)'
             ]
           },
           {
             '@type': 'WebSite',
             '@id': 'https://readmin.dev/#website',
             url: 'https://readmin.dev',
-            name: 'Raúl E. (readmin) - Portafolio Profesional',
+            name: 'Raúl E. (readmin) - Stack Técnico & Portafolio',
             publisher: {
               '@id': 'https://readmin.dev/#person'
             }
@@ -55,16 +53,14 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen bg-dark-950 text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+  <div class="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-[#3465a4]/30 selection:text-[#204a87]">
     <!-- Main Header -->
     <TheNavbar />
 
     <!-- Main Content -->
-    <main class="flex-grow">
+<main class="flex-grow">
       <HeroSection />
       <ProjectsSection />
-      <SkillsSection />
-      <AboutSection />
       <ContactSection />
     </main>
 

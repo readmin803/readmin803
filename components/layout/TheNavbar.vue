@@ -31,15 +31,14 @@ const projectsSubmenu = [
 ]
 
 const navLinks = [
+  { label: 'Inicio', href: '#' },
   { label: 'Proyectos', href: '#proyectos', hasSubmenu: true },
-  { label: 'Stack Técnico', href: '#skills' },
-  { label: 'Sobre Mí', href: '#sobre-mi' },
   { label: 'Contacto', href: '#contacto' }
 ]
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-md border-b border-slate-800/70">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-50/80 backdrop-blur-md border-b border-slate-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Brand Logo -->
@@ -48,10 +47,10 @@ const navLinks = [
             <Code2 class="w-5 h-5 text-white" />
           </div>
           <div class="flex flex-col">
-            <span class="text-lg font-bold text-white tracking-tight flex items-center font-mono">
+            <span class="text-lg font-bold text-slate-900 tracking-tight flex items-center font-mono">
               <span class="text-cyan-400 font-extrabold">[re]</span>admin
             </span>
-            <span class="text-[11px] font-mono text-slate-400">
+            <span class="text-[11px] font-mono text-slate-600">
               Raúl E. · @readmin803
             </span>
           </div>
@@ -59,24 +58,24 @@ const navLinks = [
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-1 lg:gap-2 relative">
-          <a
-            v-for="link in navLinks"
-            :key="link.label"
-            :href="link.href"
-            class="px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-900/60 rounded-lg transition-colors relative group"
-          >
-            {{ link.label }}
-            <component v-if="link.hasSubmenu" :is="ChevronDown" class="inline w-3 h-3 ml-1 align-middle" />
-          </a>
+<a
+             v-for="link in navLinks"
+             :key="link.label"
+             :href="link.href"
+             class="px-3 py-1.5 text-sm font-medium rounded-lg bg-white/60 border border-transparent text-slate-700 hover:border-cyan-500/40 hover:text-cyan-700 hover:bg-cyan-500/10 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+           >
+             {{ link.label }}
+             <component v-if="link.hasSubmenu" :is="ChevronDown" class="inline w-3 h-3 ml-1 align-middle" />
+           </a>
           <!-- Projects Submenu -->
           <div
-            class="absolute top-full left-0 mt-2 w-56 bg-dark-900 border border-slate-800 rounded-xl shadow-xl shadow-black/40 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+            class="absolute top-full left-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-xl shadow-black/40 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
           >
             <a
               v-for="item in projectsSubmenu"
               :key="item.label"
               :href="item.href"
-              class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors"
+              class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:text-cyan-400 hover:bg-slate-200/60 transition-colors"
             >
               <component :is="item.icon" class="w-4 h-4" />
               <span>{{ item.label }}</span>
@@ -91,10 +90,10 @@ const navLinks = [
             href="https://github.com/readmin803"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-slate-300 hover:text-white hover:bg-slate-800/80 rounded-lg transition-colors border border-transparent hover:border-slate-700"
+            class="px-3 py-1.5 rounded-lg bg-white/60 border border-transparent text-slate-700 hover:border-emerald-500/40 hover:text-emerald-700 hover:bg-emerald-500/10 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
             title="Ver GitHub @readmin803"
           >
-            <Github class="w-5 h-5" />
+            <Github class="w-4 h-4" />
           </a>
         </div>
 
@@ -104,13 +103,13 @@ const navLinks = [
             href="https://github.com/readmin803"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-slate-300 hover:text-white"
+            class="p-2 text-slate-700 hover:text-slate-900"
           >
             <Github class="w-5 h-5" />
           </a>
           <button
             @click="toggleMobileMenu"
-            class="p-2 text-slate-400 hover:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="p-2 text-slate-600 hover:text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
             aria-label="Abrir menú"
           >
             <component :is="isMobileMenuOpen ? X : Menu" class="w-6 h-6" />
@@ -130,14 +129,14 @@ const navLinks = [
     >
         <div
           v-if="isMobileMenuOpen"
-          class="md:hidden bg-dark-900/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl"
+          class="md:hidden bg-white/95 border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl"
         >
           <a
             v-for="link in navLinks"
             :key="link.label"
             :href="link.href"
             @click="closeMobileMenu"
-            class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-slate-800/60"
+            class="block px-3 py-2 rounded-lg text-base font-medium text-slate-800 hover:text-cyan-400 hover:bg-slate-200/60"
           >
             {{ link.label }}
           </a>
@@ -148,21 +147,22 @@ const navLinks = [
               :key="item.label"
               :href="item.href"
               @click="closeMobileMenu"
-              class="flex items-center gap-2 block px-3 py-2 rounded-lg text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60"
+              class="flex items-center gap-2 block px-3 py-2 rounded-lg text-sm text-slate-700 hover:text-cyan-400 hover:bg-slate-200/60"
             >
               <component :is="item.icon" class="w-4 h-4" />
               {{ item.label }}
             </a>
           </div>
-          <div class="pt-4 border-t border-slate-800">
-            <a
-              href="https://github.com/readmin803"
-              @click="closeMobileMenu"
-              class="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-cyan-600 hover:bg-cyan-500 shadow-md shadow-cyan-600/30"
-            >
-              Ver GitHub @readmin803
-            </a>
-          </div>
+<div class="pt-4 border-t border-slate-200">
+             <a
+               href="https://github.com/readmin803"
+               @click="closeMobileMenu"
+               class="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm bg-white/70 border-2 border-emerald-500/30 text-emerald-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 hover:shadow-lg backdrop-blur-sm transition-all"
+             >
+               <Github class="w-4 h-4" />
+               @readmin803
+             </a>
+           </div>
         </div>
     </transition>
   </header>

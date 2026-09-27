@@ -41,7 +41,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section id="contacto" class="py-24 bg-dark-900/50 border-t border-slate-800/80 relative">
+  <section id="contacto" class="py-24 bg-slate-50 border-t border-slate-200/80 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <!-- Section Header -->
@@ -51,11 +51,11 @@ const handleSubmit = async () => {
             <span>Contacto Directo</span>
           </div>
 
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             ¿Hablamos sobre un proyecto o vacante?
           </h2>
 
-          <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+          <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto">
             Estoy disponible para contrataciones, colaboraciones y retos técnicos.
           </p>
         </div>
@@ -63,16 +63,16 @@ const handleSubmit = async () => {
         <div class="grid grid-cols-1 gap-8 items-start">
           <!-- Right: Interactive Contact Form -->
           <div class="md:col-span-8 mx-auto">
-            <div class="p-6 sm:p-8 rounded-2xl bg-dark-900/90 border border-slate-800 shadow-xl backdrop-blur-sm">
-              <h3 class="text-lg font-bold text-white mb-2">Enviar un mensaje</h3>
-              <p class="text-xs sm:text-sm text-slate-400 mb-6">
-                Completa el formulario y se preparará tu consulta.
+            <div class="p-6 sm:p-8 rounded-2xl bg-white/90 border border-slate-200 shadow-xl backdrop-blur-sm">
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Enviar un mensaje</h3>
+              <p class="text-xs sm:text-sm text-slate-600 mb-6">
+                Completa el formulario y te respondo lo antes posible.
               </p>
 
               <div v-if="isSubmitted" class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2">
                 <CheckCircle2 class="w-8 h-8 text-emerald-400 mx-auto" />
-                <h4 class="text-sm font-bold text-white">¡Mensaje enviado!</h4>
-                <p class="text-xs text-slate-300">
+                <h4 class="text-sm font-bold text-slate-900">¡Mensaje enviado!</h4>
+                <p class="text-xs text-slate-700">
                   Gracias por escribir. Te responderé lo antes posible.
                 </p>
                 <button
@@ -88,7 +88,7 @@ const handleSubmit = async () => {
                   {{ errorMessage }}
                 </div>
                 <div>
-                  <label for="name" class="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  <label for="name" class="block text-xs font-mono font-medium text-slate-700 mb-1.5">
                     Tu nombre *
                   </label>
                   <input
@@ -97,12 +97,12 @@ const handleSubmit = async () => {
                     type="text"
                     required
                     placeholder="Tu nombre o empresa"
-                    class="w-full px-3.5 py-2.5 rounded-xl bg-dark-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-600 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label for="email" class="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  <label for="email" class="block text-xs font-mono font-medium text-slate-700 mb-1.5">
                     Correo electrónico *
                   </label>
                   <input
@@ -111,12 +111,12 @@ const handleSubmit = async () => {
                     type="email"
                     required
                     placeholder="Tu email"
-                    class="w-full px-3.5 py-2.5 rounded-xl bg-dark-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-600 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label for="subject" class="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  <label for="subject" class="block text-xs font-mono font-medium text-slate-700 mb-1.5">
                     Asunto o Tipo de Proyecto
                   </label>
                   <input
@@ -124,12 +124,12 @@ const handleSubmit = async () => {
                     v-model="formState.subject"
                     type="text"
                     placeholder="Ej. Proyecto de desarrollo / Automatización"
-                    class="w-full px-3.5 py-2.5 rounded-xl bg-dark-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-600 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label for="message" class="block text-xs font-mono font-medium text-slate-300 mb-1.5">
+                  <label for="message" class="block text-xs font-mono font-medium text-slate-700 mb-1.5">
                     Detalles del mensaje *
                   </label>
                   <textarea
@@ -138,7 +138,7 @@ const handleSubmit = async () => {
                     required
                     rows="4"
                     placeholder="Cuéntame sobre tu proyecto o las integraciones necesarias"
-                    class="w-full px-3.5 py-2.5 rounded-xl bg-dark-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-600 transition-colors resize-none"
                   ></textarea>
                 </div>
 
