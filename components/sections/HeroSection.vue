@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import {
   ArrowDown,
   Github,
@@ -18,180 +18,236 @@ import {
   Search,
   Replace,
   X,
-  Check
+  Check,
+  ChevronUp,
+  ChevronDown,
+  Pencil
 } from 'lucide-vue-next'
 
-const activeTab = ref<'esquema' | 'competencias'>('esquema')
 const isMinimized = ref(false)
 const isMaximized = ref(false)
-const statusMessage = ref('FullStack.txt [UTF-8]  •  Solo lectura')
 const isCopied = ref(false)
+const isModified = ref(false)
 
-const fileContents = {
-  esquema: [
-    '=============================================================================',
-    '  ESQUEMA TÉCNICO INTEGRAL: LENGUAJES, HERRAMIENTAS Y SERVICIOS (Readmin)',
-    '===============================================================================',
-    '',
-    '',
-    '1. LENGUAJES DE PROGRAMACIÓN, SCRIPTING Y DOMINIO',
-    '├── HTML5 / CSS3',
-    '├── PHP',
-    '├── JavaScript (ES6+)',
-    '├── TypeScript',
-    '├── Python',
-    '├── SQL',
-    '├── C/AL (Microsoft Dynamics NAV)',
-    '├── ZPL (Zebra Programming Language)',
-    '├── Bash / PowerShell',
-    '',
-    '',
-    '2. DESARROLLO WEB, FRAMEWORKS Y LÓGICA BACKEND',
-    '├── Vue 3 (Composition API)',
-    '├── Nuxt 3',
-    '├── Tailwind CSS',
-    '├── Node.js',
-    '├── Nitro Engine',
-    '└── Phaser.js',
-    '',
-    '',
-    '3. BASES DE DATOS, ALMACENAMIENTO Y PERSISTENCIA',
-    '├── Relacionales y BaaS:',
-    '│   ├── MySQL',
-    '│   ├── MariaDB',
-    '│   ├── PostgreSQL',
-    '│   └── Supabase',
-    '│   └── NocoDB',
-    '',
-    '',
-    '└── Sistemas de Almacenamiento y Backup:',
-    '    ├── ZFS',
-    '    ├── Configuración RAID / Sys RAID',
-    '    ├── Servidores NAS',
-    '    └── Synology Active Backup',
-    '',
-    '',
-    '4. AUTOMATIZACIÓN, INTEGRACIÓN Y WORKFLOWS',
-    '├── n8n',
-    '└── make',
-    '',
-    '',
-    '5. ERP Y SOFTWARE ESPECIALIZADO DE PLANTA',
-    '└── Microsoft Dynamics NAV (Navision)',
-    '    ├── Desarrollo de reportes, certificados, códigos y formularios',
-    '    └── Integración directa de impresión de etiquetas térmicas Zebra (ZPL)',
-    '',
-    '',
-    '6. SISTEMAS OPERATIVOS Y VIRTUALIZACIÓN',
-    '├── Servidores y S.O.:',
-    '│   └── Windows Server (Servicios RDP / SMB)',
-    '└── Virtualización:',
-    '    ├── VMware ESXi',
-    '    └── Proxmox',
-    '',
-    '',
-    '7. REDES, INFRAESTRUCTURA, VPN Y CIBERSEGURIDAD',
-    '├── Infraestructura Física y Comunicaciones:',
-    '│   ├── Montaje y cableado de Racks (Redes LAN)',
-    '│   ├── Instalación y configuración de Routers, Switches y Firewalls',
-    '│   ├── Despliegue de redes de Fibra Óptica',
-    '│   ├── Videovigilancia IP',
-    '│   └── Despliegue y soporte de Redes WiFi (WLAN)',
-    '├── Fabricantes y Equipamiento de Red:',
-    '│   ├── Fortinet',
-    '│   ├── Ubiquiti',
-    '│   ├── MikroTik',
-    '│   ├── Grandstream',
-    '│   ├── Ruijie',
-    '│   ├── Cambium',
-    '│   └── Cisco',
-    '├── Protocolos, VPN y Acceso Remoto:',
-    '│   ├── OpenVPN',
-    '│   ├── WireGuard',
-    '│   ├── Tailscale',
-    '│   ├── Cloudflare WARP',
-    '│   ├── RDP (Escritorio Remoto)',
-    '│   ├── SSH',
-    '│   ├── Termius',
-    '│   └── RealVNC',
-    '└── Administración Cloud, Identidad y EdTech:',
-    '    ├── Microsoft Intune',
-    '    ├── AAD (Azure Active Directory / Entra ID)',
-    '    └── Linewize / Classwise',
-    '',
-    '',
-    '8. HARDWARE, HELPDESK Y SOPORTE TÉCNICO',
-    '├── Mantenimiento preventivo y correctivo hardware/software',
-    '├── Reparación y sustitución de componentes (placas base, pantallas, módulos)',
-    '├── Montaje y configuración de estaciones de trabajo y PCs',
-    '└── Mantenimiento y resolución de incidencias en impresoras (tóner, averías)',
-    '',
-    '',
-    '9. SOFTWARE DE PUNTO DE VENTA (TPV / POS)',
-    '├── Micros / Oracle',
-    '└── AgoraPOS',
-    '',
-    '',
-    '10. DESPLIEGUE, CONTROL DE VERSIONES Y ENTORNO DEV / AI',
-    '├── Vercel',
-    '├── Git / GitHub',
-    '├── Ollama',
-    '├── Antigravity CLI',
-    '└── OpenCode',
-    '',
-    '',
-    '11. HERRAMIENTAS CORPORATIVAS Y PRODUCTIVIDAD',
-    '└── Microsoft Office Suite / Outlook',
-  ],
-  competencias: [
-    '============================================================================',
-    'COMPETENCIAS · RAÚL E. ([re]admin)',
-    'Contacto: readmin803@gmail.com  |  GitHub: github.com/readmin803',
-    '============================================================================',
-    '',
-    '[ADMINISTRACIÓN ERP & ENTORNO EMPRESARIAL]',
-    '• Microsoft Dynamics NAV (Navision):',
-    '  - Personalización de formularios, reportes y lógica de negocio.',
-    '  - Integración de etiquetas térmicas industriales Zebra (lenguaje ZPL).',
-    '• Suite Corporativa:',
-    '  - Gestión integral de entorno de trabajo Microsoft Office y Outlook.',
-    '',
-    '[PROGRAMACIÓN & DESARROLLO A MEDIDA]',
-    '• Desarrollo Fullstack Punta a Punta:',
-    '  - Backend & APIs: PHP, Node.js, Python, Nitro Engine y APIs REST agregadas.',
-    '  - Bases de Datos: MySQL, SQL Server, PostgreSQL y diseño relacional.',
-    '  - Frontend Web Reactivo: JavaScript (ES6+), Vue 3, Nuxt 3 y Tailwind CSS.',
-    '• Automatizaciones & Flujos de Datos:',
-    '  - n8n (workflows complejos, webhooks y conectores entre plataformas).',
-    '',
-    '[SISTEMAS, INFRAESTRUCTURA & REDES]',
-    '• Servidores & Acceso Remoto:',
-    '  - Gestión y administración de Windows Server y Escritorio Remoto (RDP).',
-    '  - Administración de entornos Linux.',
-    '• Virtualización & Almacenamiento:',
-    '  - VMware ESXi, Proxmox VE, pools ZFS y sistemas RAID.',
-    '  - Políticas de copias de seguridad (Synology Active Backup / NAS).',
-    '• Redes & Conectividad:',
-    '  - Switches gestionables L2/L3, routers, VLANs y cableado estructurado.',
-    '  - WiFi empresarial (MikroTik, Ubiquiti, Cisco) y auditorías de cobertura.',
-    '  - Conexiones seguras: VPNs WireGuard y OpenVPN.',
-    '',
-    '[SOPORTE TÉCNICO & HELPDESK]',
-    '• Mantenimiento preventivo y correctivo integral de hardware y software.',
-    '• Diagnóstico de averías, sustitución de componentes y soporte técnico.',
-    '• Resolución de incidencias y atención a usuarios finales.'
-  ]
+const fileName = ref('stack.txt')
+const statusMessage = ref('')
+
+const toLines = (text: string) => text.replace(/\r\n/g, '\n').split('\n')
+
+// Contenido vivo desde el repo (data/stack.txt) via servidor
+const { data: stackData } = await useFetch<{ content: string }>('/api/stack', { server: true })
+
+const initialContent = typeof stackData.value?.content === 'string' && stackData.value.content
+  ? stackData.value.content
+  : 'No se pudo cargar data/stack.txt'
+
+const lines = ref<string[]>(toLines(initialContent))
+
+const history = ref<string[][]>([])
+const future = ref<string[][]>([])
+
+const currentLines = computed(() => lines.value)
+
+const findOpen = ref(false)
+const replaceOpen = ref(false)
+const findQuery = ref('')
+const replaceQuery = ref('')
+const matchIndex = ref(0)
+const findInput = ref<HTMLInputElement | null>(null)
+
+type Hit = { line: number; start: number; end: number }
+
+const matches = computed<Hit[]>(() => {
+  const q = findQuery.value
+  if (!findOpen.value || !q) return []
+  const needle = q.toLowerCase()
+  const res: Hit[] = []
+  lines.value.forEach((line, i) => {
+    const hay = line.toLowerCase()
+    let from = hay.indexOf(needle)
+    while (from !== -1) {
+      res.push({ line: i, start: from, end: from + q.length })
+      from = hay.indexOf(needle, from + q.length)
+    }
+  })
+  return res
+})
+
+const totalMatches = computed(() => matches.value.length)
+const currentHit = computed<Hit | null>(() => matches.value[matchIndex.value] ?? null)
+const matchLabel = computed(() =>
+  totalMatches.value ? `${Math.min(matchIndex.value + 1, totalMatches.value)}/${totalMatches.value}` : '0/0'
+)
+
+watch(matches, () => {
+  matchIndex.value = 0
+})
+
+const refreshStatus = () => {
+  statusMessage.value = `${fileName.value} [UTF-8]  •  ${isModified.value ? 'Modificado' : 'Solo lectura'}`
+}
+refreshStatus()
+
+const flashStatus = (msg: string) => {
+  statusMessage.value = msg
+  setTimeout(refreshStatus, 2500)
 }
 
-const currentLines = computed(() => fileContents[activeTab.value])
+const markModified = () => {
+  isModified.value = true
+  refreshStatus()
+}
+
+const pushHistory = () => {
+  history.value.push([...lines.value])
+  if (history.value.length > 50) history.value.shift()
+  future.value = []
+}
+
+const undo = () => {
+  if (!history.value.length) return
+  future.value.push([...lines.value])
+  lines.value = history.value.pop() as string[]
+  markModified()
+}
+
+const redo = () => {
+  if (!future.value.length) return
+  history.value.push([...lines.value])
+  lines.value = future.value.pop() as string[]
+  markModified()
+}
+
+const scrollToHit = () => {
+  nextTick(() => {
+    const hit = currentHit.value
+    if (!hit) return
+    document.getElementById('gedit-line-' + hit.line)?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  })
+}
+
+const stepMatch = (dir: 1 | -1) => {
+  if (!totalMatches.value) return
+  matchIndex.value = (matchIndex.value + dir + totalMatches.value) % totalMatches.value
+  scrollToHit()
+}
+
+const focusFind = () => {
+  nextTick(() => findInput.value?.focus())
+}
+
+const toggleFind = () => {
+  findOpen.value = true
+  replaceOpen.value = false
+  focusFind()
+}
+
+const toggleReplace = () => {
+  findOpen.value = true
+  replaceOpen.value = true
+  focusFind()
+}
+
+const closeFind = () => {
+  findOpen.value = false
+  replaceOpen.value = false
+  findQuery.value = ''
+}
+
+const doReplace = () => {
+  const hit = currentHit.value
+  if (!hit) return
+  pushHistory()
+  const line = lines.value[hit.line]
+  lines.value.splice(hit.line, 1, line.slice(0, hit.start) + replaceQuery.value + line.slice(hit.end))
+  markModified()
+}
+
+const doReplaceAll = () => {
+  const hits = matches.value
+  if (!hits.length) return
+  pushHistory()
+  const byLine = new Map<number, Hit[]>()
+  hits.forEach(hit => {
+    const bucket = byLine.get(hit.line) ?? []
+    bucket.push(hit)
+    byLine.set(hit.line, bucket)
+  })
+  byLine.forEach((bucket, lineIdx) => {
+    let out = lines.value[lineIdx]
+    for (let i = bucket.length - 1; i >= 0; i--) {
+      out = out.slice(0, bucket[i].start) + replaceQuery.value + out.slice(bucket[i].end)
+    }
+    lines.value[lineIdx] = out
+  })
+  markModified()
+}
+
+const segments = (line: string, idx: number): { text: string; cls: string }[] => {
+  if (!line) return [{ text: ' ', cls: '' }]
+  const hits = matches.value.filter(hit => hit.line === idx)
+  if (!hits.length) return [{ text: line, cls: '' }]
+  const cur = currentHit.value
+  const segs: { text: string; cls: string }[] = []
+  let cursor = 0
+  hits.forEach(hit => {
+    if (hit.start > cursor) segs.push({ text: line.slice(cursor, hit.start), cls: '' })
+    const isCurrent = !!cur && cur.line === hit.line && cur.start === hit.start
+    segs.push({
+      text: line.slice(hit.start, hit.end),
+      cls: isCurrent ? 'bg-amber-300 text-black font-bold' : 'bg-cyan-200 text-black'
+    })
+    cursor = hit.end
+  })
+  if (cursor < line.length) segs.push({ text: line.slice(cursor), cls: '' })
+  return segs
+}
+
+const lineClass = (line: string) => {
+  if (/^\d+\./.test(line)) return 'font-bold text-slate-900'
+  if (/^[\u2502 ]+\S/.test(line)) return 'italic text-slate-600'
+  if (/^[\u251c\u2514]\u2500\u2500/.test(line)) return 'font-semibold text-slate-800'
+  if (line.startsWith('#') || line.startsWith('/*')) return 'italic text-slate-500'
+  return 'text-[#1a1a1a]'
+}
+
+const newDocument = async () => {
+  pushHistory()
+  try {
+    const res = await $fetch<{ content: string }>('/api/stack')
+    lines.value = toLines(res.content)
+    fileName.value = 'stack.txt'
+    isModified.value = false
+    flashStatus('✓ Restaurado desde el repositorio')
+  } catch {
+    statusMessage.value = 'No se pudo restaurar desde el repositorio'
+  }
+}
+
+const fileInput = ref<HTMLInputElement | null>(null)
+
+const openDocument = () => fileInput.value?.click()
+
+const onFilePicked = async (event: Event) => {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (!file) return
+  const text = await file.text()
+  pushHistory()
+  lines.value = text.replace(/\r\n/g, '\n').split('\n')
+  fileName.value = file.name
+  isModified.value = true
+  refreshStatus()
+  flashStatus(`Abierto: ${file.name}`)
+  input.value = ''
+}
 
 const copyContent = async () => {
   try {
     await navigator.clipboard.writeText(currentLines.value.join('\n'))
-    statusMessage.value = '✓ Texto copiado al portapapeles'
     isCopied.value = true
+    flashStatus('✓ Texto copiado al portapapeles')
     setTimeout(() => {
-      statusMessage.value = `${activeTab.value === 'esquema' ? 'FullStack.txt' : 'competencias.txt'} [UTF-8]  •  Solo lectura`
       isCopied.value = false
     }, 2500)
   } catch {
@@ -210,6 +266,121 @@ const toggleMinimize = () => {
 const toggleMaximize = () => {
   isMaximized.value = !isMaximized.value
 }
+
+/* ---------- Modo edición: la contraseña se valida en el servidor (.env) ---------- */
+const TOKEN_KEY = 'readmin803:edit-token'
+
+const editable = ref(false)
+const editText = ref('')
+const showPasswordDialog = ref(false)
+const passwordInput = ref('')
+const passwordError = ref('')
+const authBusy = ref(false)
+const passwordField = ref<HTMLInputElement | null>(null)
+
+const applyEditText = () => {
+  lines.value = editText.value.replace(/\r\n/g, '\n').split('\n')
+}
+
+const startEdit = () => {
+  if (editable.value) return
+  editText.value = lines.value.join('\n')
+  editable.value = true
+  closeFind()
+  statusMessage.value = `${fileName.value} [UTF-8]  •  Editando…`
+}
+
+const stopEdit = () => {
+  if (!editable.value) return
+  applyEditText()
+  editable.value = false
+  isModified.value = true
+  refreshStatus()
+}
+
+const verifyToken = async (token: string) => {
+  try {
+    const res = await $fetch<{ valid: boolean }>('/api/edit-session', {
+      method: 'GET',
+      query: { token }
+    })
+    return !!res.valid
+  } catch {
+    return false
+  }
+}
+
+const requestEdit = async () => {
+  if (editable.value) {
+    stopEdit()
+    return
+  }
+  const token = sessionStorage.getItem(TOKEN_KEY)
+  if (token && (await verifyToken(token))) {
+    startEdit()
+    return
+  }
+  passwordInput.value = ''
+  passwordError.value = ''
+  showPasswordDialog.value = true
+  nextTick(() => passwordField.value?.focus())
+}
+
+const cancelPassword = () => {
+  showPasswordDialog.value = false
+  passwordInput.value = ''
+  passwordError.value = ''
+}
+
+const submitPassword = async () => {
+  if (authBusy.value || !passwordInput.value) return
+  authBusy.value = true
+  passwordError.value = ''
+  try {
+    const res = await $fetch<{ token: string }>('/api/edit-session', {
+      method: 'POST',
+      body: { password: passwordInput.value }
+    })
+    sessionStorage.setItem(TOKEN_KEY, res.token)
+    cancelPassword()
+    startEdit()
+  } catch (error: any) {
+    passwordError.value = error?.data?.message || error?.data?.statusMessage || 'No se pudo validar la contraseña'
+  } finally {
+    authBusy.value = false
+  }
+}
+
+const saveDocument = async () => {
+  if (!editable.value) {
+    await copyContent()
+    return
+  }
+  applyEditText()
+
+  const token = sessionStorage.getItem(TOKEN_KEY)
+  try {
+    const res = await $fetch<{ ok: boolean; scope: string; commitUrl?: string }>('/api/save-stack', {
+      method: 'POST',
+      body: { token, content: lines.value.join('\n') }
+    })
+    isModified.value = false
+    statusMessage.value = res.scope === 'github'
+      ? '✓ Guardado en GitHub (commit)'
+      : '✓ Guardado en data/stack.txt'
+    setTimeout(refreshStatus, 3000)
+  } catch (error: any) {
+    if (error?.statusCode === 401 || error?.data?.statusCode === 401) {
+      sessionStorage.removeItem(TOKEN_KEY)
+      showPasswordDialog.value = true
+      passwordError.value = 'La sesión expiró: vuelve a introducir la contraseña'
+      nextTick(() => passwordField.value?.focus())
+      return
+    }
+    statusMessage.value = error?.data?.message || 'Error al guardar'
+  }
+}
+
 </script>
 
 <template>
@@ -330,7 +501,7 @@ const toggleMaximize = () => {
         <!-- Right: Interactive Terminal & System Metrics Card -->
         <div class="lg:col-span-7 w-full">
           <!-- GNOME 2.0 Window (gedit) -->
-          <div class="rounded-[3px] border border-[#2b2d2f] shadow-2xl bg-[#dcdad5] overflow-hidden select-none transition-all duration-200">
+          <div class="relative rounded-[3px] border border-[#2b2d2f] shadow-2xl bg-[#dcdad5] overflow-hidden select-none transition-all duration-200">
             <!-- 1. Metacity Titlebar (GNOME 2.0 style) -->
             <div class="h-6 sm:h-7 bg-gradient-to-b from-[#565b5e] to-[#43474a] border-b border-[#2b2d2f] px-2 flex items-center justify-between text-white">
               <!-- Left: Document icon & Title -->
@@ -342,7 +513,7 @@ const toggleMaximize = () => {
                   <div class="w-2 h-[1px] bg-slate-400 mt-[2px] ml-0.5"></div>
                 </div>
                 <span class="font-sans font-semibold text-[11px] sm:text-[12px] tracking-wide truncate text-white drop-shadow-sm">
-                  {{ activeTab === 'esquema' ? 'FullStack.txt' : 'competencias.txt' }} - gedit
+                  {{ fileName }} - gedit
                 </span>
               </div>
 
@@ -396,9 +567,9 @@ const toggleMaximize = () => {
               <!-- New -->
               <button
                 type="button"
-                @click="activeTab = 'esquema'"
+                @click="newDocument"
                 class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0"
-                title="Ver FullStack.txt"
+                title="Restaurar documento original"
               >
                 <div class="w-4 h-4 bg-white border border-[#555] relative shrink-0">
                   <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-[#dcdad5] border-b border-l border-[#555]"></div>
@@ -409,20 +580,33 @@ const toggleMaximize = () => {
               <!-- Open -->
               <button
                 type="button"
-                @click="activeTab = activeTab === 'esquema' ? 'competencias' : 'esquema'"
+                @click="openDocument"
                 class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0"
-                title="Cambiar documento"
+                title="Abrir un .txt del equipo"
               >
                 <FolderOpen class="w-4 h-4 text-[#b28214]" />
                 <span class="text-[10px] font-sans mt-0.5 text-black">Open</span>
               </button>
 
+              <!-- Edit -->
+              <button
+                type="button"
+                @click="requestEdit"
+                :class="editable
+                  ? 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-[#3465a4] bg-[#3465a4]/15 shrink-0'
+                  : 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0'"
+                :title="editable ? 'Terminar de editar' : 'Editar documento (requiere contraseña)'"
+              >
+                <Pencil class="w-4 h-4" :class="editable ? 'text-[#204a87]' : 'text-[#204a87]'" />
+                <span class="text-[10px] font-sans mt-0.5 text-black">{{ editable ? 'Done' : 'Edit' }}</span>
+              </button>
+
               <!-- Save -->
               <button
                 type="button"
-                @click="copyContent"
+                @click="saveDocument"
                 class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0"
-                title="Guardar / Copiar texto"
+                :title="editable ? 'Guardar cambios en este navegador' : 'Copiar texto del documento'"
               >
                 <Save class="w-4 h-4 text-[#204a87]" />
                 <span class="text-[10px] font-sans mt-0.5 text-black">Save</span>
@@ -445,21 +629,29 @@ const toggleMaximize = () => {
               <!-- Undo -->
               <button
                 type="button"
-                class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] opacity-40 cursor-default shrink-0"
-                disabled
+                @click="undo"
+                :disabled="!history.length"
+                :class="history.length
+                  ? 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0'
+                  : 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] opacity-40 cursor-default shrink-0'"
+                title="Deshacer"
               >
-                <Undo2 class="w-4 h-4 text-slate-600" />
-                <span class="text-[10px] font-sans mt-0.5 text-slate-500">Undo</span>
+                <Undo2 class="w-4 h-4" :class="history.length ? 'text-slate-700' : 'text-slate-600'" />
+                <span class="text-[10px] font-sans mt-0.5" :class="history.length ? 'text-black' : 'text-slate-500'">Undo</span>
               </button>
 
               <!-- Redo -->
               <button
                 type="button"
-                class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] opacity-40 cursor-default shrink-0"
-                disabled
+                @click="redo"
+                :disabled="!future.length"
+                :class="future.length
+                  ? 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0'
+                  : 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] opacity-40 cursor-default shrink-0'"
+                title="Rehacer"
               >
-                <Redo2 class="w-4 h-4 text-slate-600" />
-                <span class="text-[10px] font-sans mt-0.5 text-slate-500">Redo</span>
+                <Redo2 class="w-4 h-4" :class="future.length ? 'text-slate-700' : 'text-slate-600'" />
+                <span class="text-[10px] font-sans mt-0.5" :class="future.length ? 'text-black' : 'text-slate-500'">Redo</span>
               </button>
 
               <!-- Separator -->
@@ -502,8 +694,11 @@ const toggleMaximize = () => {
               <!-- Find -->
               <button
                 type="button"
-                class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0"
-                title="Buscar"
+                @click="toggleFind"
+                :class="findOpen && !replaceOpen
+                  ? 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-[#3465a4] bg-[#3465a4]/15 shrink-0'
+                  : 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0'"
+                title="Buscar en el documento"
               >
                 <Search class="w-4 h-4 text-[#444]" />
                 <span class="text-[10px] font-sans mt-0.5 text-black">Find</span>
@@ -512,52 +707,106 @@ const toggleMaximize = () => {
               <!-- Replace -->
               <button
                 type="button"
-                class="flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0"
-                title="Reemplazar"
+                @click="toggleReplace"
+                :class="replaceOpen
+                  ? 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-[#3465a4] bg-[#3465a4]/15 shrink-0'
+                  : 'flex flex-col items-center justify-center px-1.5 py-1 min-w-[38px] rounded-[2px] border border-transparent hover:border-[#8e8a82] hover:bg-[#f6f4ee] active:bg-[#c8c4bc] text-[#1c1d1e] focus:outline-none shrink-0'"
+                title="Reemplazar en el documento"
               >
                 <Replace class="w-4 h-4 text-[#444]" />
                 <span class="text-[10px] font-sans mt-0.5 text-black">Replace</span>
               </button>
             </div>
 
+            <!-- 3.5 Find / Replace Bar (GtkRecentChooser style) -->
+            <div v-if="findOpen" class="bg-[#e8e6e1] border-b border-[#aba79e] px-2 py-1.5 flex flex-col gap-1.5">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <label class="text-[11px] font-sans text-black shrink-0">Buscar:</label>
+                <input
+                  ref="findInput"
+                  v-model="findQuery"
+                  type="text"
+                  placeholder="texto a buscar"
+                  class="min-w-[140px] flex-1 px-2 py-1 text-[12px] font-mono text-black bg-white border border-[#8b877f] border-t-[#403e3a] border-l-[#403e3a] rounded-[2px] focus:outline-none focus:ring-1 focus:ring-[#3465a4]"
+                  @keydown.enter.prevent="stepMatch(1)"
+                  @keydown.esc="closeFind"
+                />
+                <span class="text-[11px] font-mono text-slate-700 min-w-[44px] text-center tabular-nums">{{ matchLabel }}</span>
+                <button
+                  type="button"
+                  @click="stepMatch(-1)"
+                  class="w-6 h-6 flex items-center justify-center border border-[#8b877f] border-t-white border-l-white bg-[#dcdad5] hover:bg-[#f6f4ee] rounded-[2px] focus:outline-none disabled:opacity-40"
+                  :disabled="!totalMatches"
+                  title="Coincidencia anterior"
+                >
+                  <ChevronUp class="w-3.5 h-3.5 text-black" />
+                </button>
+                <button
+                  type="button"
+                  @click="stepMatch(1)"
+                  class="w-6 h-6 flex items-center justify-center border border-[#8b877f] border-t-white border-l-white bg-[#dcdad5] hover:bg-[#f6f4ee] rounded-[2px] focus:outline-none disabled:opacity-40"
+                  :disabled="!totalMatches"
+                  title="Coincidencia siguiente"
+                >
+                  <ChevronDown class="w-3.5 h-3.5 text-black" />
+                </button>
+                <button
+                  type="button"
+                  @click="closeFind"
+                  class="w-6 h-6 flex items-center justify-center border border-[#8b877f] border-t-white border-l-white bg-[#dcdad5] hover:bg-red-100 rounded-[2px] focus:outline-none"
+                  title="Cerrar búsqueda"
+                >
+                  <X class="w-3.5 h-3.5 text-black" />
+                </button>
+              </div>
+
+              <div v-if="replaceOpen" class="flex items-center gap-1.5 flex-wrap">
+                <label class="text-[11px] font-sans text-black shrink-0">Reemplazar:</label>
+                <input
+                  v-model="replaceQuery"
+                  type="text"
+                  placeholder="reemplazo"
+                  class="min-w-[140px] flex-1 px-2 py-1 text-[12px] font-mono text-black bg-white border border-[#8b877f] border-t-[#403e3a] border-l-[#403e3a] rounded-[2px] focus:outline-none focus:ring-1 focus:ring-[#3465a4]"
+                  @keydown.enter.prevent="doReplace"
+                  @keydown.esc="closeFind"
+                />
+                <button
+                  type="button"
+                  @click="doReplace"
+                  :disabled="!totalMatches"
+                  class="px-2 py-1 text-[11px] font-sans text-black bg-[#dcdad5] border border-[#8b877f] border-t-white border-l-white rounded-[2px] hover:bg-[#f6f4ee] focus:outline-none disabled:opacity-40"
+                >
+                  Reemplazar
+                </button>
+                <button
+                  type="button"
+                  @click="doReplaceAll"
+                  :disabled="!totalMatches"
+                  class="px-2 py-1 text-[11px] font-sans text-black bg-[#dcdad5] border border-[#8b877f] border-t-white border-l-white rounded-[2px] hover:bg-[#f6f4ee] focus:outline-none disabled:opacity-40"
+                >
+                  Todos
+                </button>
+              </div>
+            </div>
+
+            <!-- Hidden file input for Open -->
+            <input
+              ref="fileInput"
+              type="file"
+              accept=".txt,.md,.log,text/plain"
+              class="hidden"
+              @change="onFilePicked"
+            />
+
             <!-- 4. Tab Bar (GtkNotebook) -->
             <div class="bg-[#dcdad5] pt-1.5 px-2 flex items-end gap-1 border-b border-[#88847c]">
-              <!-- Tab 1: FullStack.txt -->
+              <!-- Tab: stack.txt -->
               <button
                 type="button"
-                @click="activeTab = 'esquema'"
-                class="px-2.5 py-1 text-[11px] sm:text-[12px] font-sans flex items-center gap-1.5 rounded-t-[2px] focus:outline-none transition-none cursor-pointer"
-                :class="activeTab === 'esquema'
-                  ? 'bg-white border-t border-l border-r border-[#88847c] -mb-[1px] pb-[5px] text-black font-medium'
-                  : 'bg-[#ccc8be] border border-[#a29e92] text-slate-700 hover:bg-[#e2ded2]'"
+                class="px-2.5 py-1 text-[11px] sm:text-[12px] font-sans flex items-center gap-1.5 rounded-t-[2px] focus:outline-none transition-none cursor-pointer bg-white border-t border-l border-r border-[#88847c] -mb-[1px] pb-[5px] text-black font-medium"
               >
                 <FileText class="w-3.5 h-3.5 text-slate-600" />
-                <span>FullStack.txt</span>
-                <span
-                  class="ml-1 w-3.5 h-3.5 flex items-center justify-center font-bold text-slate-600 hover:text-black"
-                  title="Cerrar pestaña"
-                >
-                  ×
-                </span>
-              </button>
-
-              <!-- Tab 2: competencias.txt -->
-              <button
-                type="button"
-                @click="activeTab = 'competencias'"
-                class="px-2.5 py-1 text-[11px] sm:text-[12px] font-sans flex items-center gap-1.5 rounded-t-[2px] focus:outline-none transition-none cursor-pointer"
-                :class="activeTab === 'competencias'
-                  ? 'bg-white border-t border-l border-r border-[#88847c] -mb-[1px] pb-[5px] text-black font-medium'
-                  : 'bg-[#ccc8be] border border-[#a29e92] text-slate-700 hover:bg-[#e2ded2]'"
-              >
-                <FileText class="w-3.5 h-3.5 text-slate-600" />
-                <span>competencias.txt</span>
-                <span
-                  class="ml-1 w-3.5 h-3.5 flex items-center justify-center font-bold text-slate-600 hover:text-black"
-                  title="Cerrar pestaña"
-                >
-                  ×
-                </span>
+                <span>{{ fileName }}</span>
               </button>
             </div>
 
@@ -567,31 +816,42 @@ const toggleMaximize = () => {
               class="border-t-2 border-l-2 border-[#76736d] border-r-2 border-b-2 border-white bg-white shadow-[inset_1px_1px_2px_rgba(0,0,0,0.25)] flex overflow-hidden"
               :class="isMaximized ? 'h-[500px]' : 'h-[360px] sm:h-[390px]'"
             >
-              <!-- Line Numbers Gutter -->
-              <div class="bg-[#f3f2ee] border-r border-[#dedad2] py-2.5 px-2 text-right font-mono text-[11px] sm:text-[12px] leading-relaxed text-[#8f8c85] select-none shrink-0 min-w-[34px]">
-                <div v-for="(_, index) in currentLines" :key="index">
-                  {{ index + 1 }}
-                </div>
-              </div>
+              <!-- Modo edición -->
+              <textarea
+                v-if="editable"
+                v-model="editText"
+                spellcheck="false"
+                class="w-full h-full resize-none p-2.5 sm:p-3 font-mono text-[11px] sm:text-[12px] leading-relaxed text-[#1a1a1a] bg-white select-text focus:outline-none"
+                @keydown.ctrl.s.prevent="saveDocument"
+                @keydown.meta.s.prevent="saveDocument"
+                @keydown.esc="stopEdit"
+              ></textarea>
 
-              <!-- Text Content Viewport -->
-              <div class="p-2.5 sm:p-3 font-mono text-[11px] sm:text-[12px] leading-relaxed text-[#1a1a1a] select-text overflow-y-auto w-full">
-                <div
-                  v-for="(line, idx) in currentLines"
-                  :key="idx"
-                  class="whitespace-pre font-mono"
-                  :class="{
-                    'text-slate-500 italic': line.startsWith('/*') || line.startsWith(' *') || line.startsWith('#'),
-                    'text-[#204a87] font-bold bg-[#3465a4]/10 px-1 rounded-sm': line.startsWith('['),
-                    'text-slate-400': line.startsWith('---') || line.startsWith('==='),
-                    'text-slate-900 font-semibold': line.startsWith('• ') && !line.startsWith('• Alias') && !line.startsWith('• Filosofía'),
-                    'text-emerald-700 font-medium': line.startsWith('+ '),
-                    'text-amber-800 font-medium': line.startsWith('> ')
-                  }"
-                >
-                  {{ line }}
+              <template v-else>
+                <!-- Line Numbers Gutter -->
+                <div class="bg-[#f3f2ee] border-r border-[#dedad2] py-2.5 px-2 text-right font-mono text-[11px] sm:text-[12px] leading-relaxed text-[#8f8c85] select-none shrink-0 min-w-[34px]">
+                  <div v-for="(_, index) in currentLines" :key="index">
+                    {{ index + 1 }}
+                  </div>
                 </div>
-              </div>
+
+                <!-- Text Content Viewport -->
+                <div class="p-2.5 sm:p-3 font-mono text-[11px] sm:text-[12px] leading-relaxed select-text overflow-y-auto w-full">
+                  <div
+                    v-for="(line, idx) in currentLines"
+                    :key="idx"
+                    :id="'gedit-line-' + idx"
+                    class="whitespace-pre font-mono"
+                    :class="lineClass(line)"
+                  >
+                    <span
+                      v-for="(seg, sIdx) in segments(line, idx)"
+                      :key="sIdx"
+                      :class="seg.cls"
+                    >{{ seg.text }}</span>
+                  </div>
+                </div>
+              </template>
             </div>
 
             <!-- 6. GNOME Status Bar (Sunken panels) -->
@@ -608,13 +868,69 @@ const toggleMaximize = () => {
                   Ln 1, Col. 1
                 </div>
                 <div class="border-t border-l border-[#8b877f] border-r border-b border-white bg-[#dcdad5] px-2 py-0.5 text-slate-800 text-[10px] sm:text-[11px]">
-                  INS
+                  {{ editable ? 'EDIT' : 'INS' }}
                 </div>
                 <!-- Diagonal Resize Grip -->
                 <div class="w-3.5 h-3.5 flex flex-col justify-end items-end gap-[1.5px] p-0.5 opacity-60 cursor-se-resize">
                   <div class="w-1 h-[1px] bg-black"></div>
                   <div class="w-2 h-[1px] bg-black"></div>
                   <div class="w-3 h-[1px] bg-black"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Diálogo de contraseña (validada en /api/edit-session) -->
+            <div
+              v-if="showPasswordDialog"
+              class="absolute inset-0 z-20 bg-black/35 flex items-center justify-center p-4 backdrop-blur-[1px]"
+            >
+              <div class="w-full max-w-[320px] bg-[#dcdad5] border border-[#2b2d2f] shadow-2xl rounded-[3px] overflow-hidden">
+                <div class="h-6 bg-gradient-to-b from-[#565b5e] to-[#43474a] border-b border-[#2b2d2f] px-2 flex items-center justify-between">
+                  <span class="text-white text-[11px] font-sans font-semibold drop-shadow-sm">Editar documento</span>
+                  <button
+                    type="button"
+                    @click="cancelPassword"
+                    class="w-[17px] h-[17px] flex items-center justify-center bg-[#d6d4ce] border-t border-l border-white border-r border-b border-[#403e3a] hover:bg-[#e4e2dc] focus:outline-none"
+                    title="Cerrar"
+                  >
+                    <X class="w-2.5 h-2.5 text-black stroke-[2.5]" />
+                  </button>
+                </div>
+
+                <div class="p-4 space-y-3">
+                  <p class="text-[12px] font-sans text-slate-800 leading-snug">
+                    Introduce la contraseña de edición para modificar este archivo:
+                  </p>
+                  <input
+                    ref="passwordField"
+                    v-model="passwordInput"
+                    type="password"
+                    placeholder="••••••••"
+                    autocomplete="current-password"
+                    class="w-full px-2 py-1.5 text-[13px] font-mono text-black bg-white border border-[#8b877f] border-t-[#403e3a] border-l-[#403e3a] rounded-[2px] focus:outline-none focus:ring-1 focus:ring-[#3465a4]"
+                    @keydown.enter.prevent="submitPassword"
+                    @keydown.esc="cancelPassword"
+                  />
+                  <p v-if="passwordError" class="text-[11px] font-sans text-red-600">
+                    {{ passwordError }}
+                  </p>
+                  <div class="flex justify-end gap-2 pt-1">
+                    <button
+                      type="button"
+                      @click="cancelPassword"
+                      class="px-3 py-1 text-[12px] font-sans text-black bg-[#dcdad5] border border-[#8b877f] border-t-white border-l-white rounded-[2px] hover:bg-[#f6f4ee] focus:outline-none"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      @click="submitPassword"
+                      :disabled="authBusy || !passwordInput"
+                      class="px-3 py-1 text-[12px] font-sans font-medium text-white bg-[#3465a4] border border-[#204a87] rounded-[2px] hover:bg-[#2a5a9e] focus:outline-none disabled:opacity-50"
+                    >
+                      {{ authBusy ? 'Validando…' : 'Aceptar' }}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

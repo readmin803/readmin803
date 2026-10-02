@@ -63,12 +63,8 @@ const getCategoryColor = (id: string) => {
         </div>
 
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Problemas reales, arquitectura clara y resultados medibles
+          Automatizaciones y nuevas tecnologías aplicadas a problemas reales
         </h2>
-
-        <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
-          Cada proyecto detalla el problema, las decisiones de arquitectura y las métricas obtenidas.
-        </p>
       </div>
 
       <!-- Main Layout: Dock Left + Content Right -->

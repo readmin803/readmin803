@@ -1,0 +1,35 @@
+1. DESARROLLO DE SOFTWARE Y ARQUITECTURA WEB
+├── Lenguajes Core: TypeScript, JavaScript (ES6+), Python, PHP, SQL
+├── Frontend & Backend: Vue 3 (Composition API), Nuxt 3, Node.js, Tailwind CSS
+├── BaaS & Bases de Datos: PostgreSQL, MySQL/MariaDB, Supabase
+└── DevOps, Automatización & Control: Git, GitHub, Vercel, n8n, Make
+
+
+2. ERP, SISTEMAS INDUSTRIALES Y LOGÍSTICA
+├── Microsoft Dynamics NAV:
+│   ├── Desarrollo en C/AL (Lógica de negocio, módulos y reportes)
+│   └── Integración de sistemas de marcaje industrial (ZPL / Zebra)
+├── Software de Punto de Venta (TPV/POS): Micros (Oracle), AgoraPOS
+└── Automatización de Procesos de Planta
+
+
+3. INFRAESTRUCTURA CLOUD, VIRTUALIZACIÓN Y SERVIDORES
+├── Virtualización & Alta Disponibilidad: VMware ESXi, Proxmox VE
+├── Sistemas Operativos & Identidad:
+│   ├── Windows Server (Active Directory / Entra ID, SMB, RDP)
+│   └── Gestión de Endpoints corporativos (Microsoft Intune)
+└── Almacenamiento, Respaldo y HA: ZFS, RAID, Servidores NAS, Synology Backup
+
+
+4. REDES, COMUNICACIONES Y CIBERSEGURIDAD
+├── Infraestructura de Red & Networking:
+│   ├── Diseño y despliegue LAN/WLAN y Fibra Óptica
+│   └── Fabricantes Enterprise: Fortinet, Cisco, Ubiquiti, MikroTik, Ruijie
+└── Conectividad Segura & VPNs:
+    ├── OpenVPN, WireGuard, Tailscale, Cloudflare WARP
+    └── Protocolos de acceso remoto (SSH, RDP cifrado)
+
+
+5. SOPORTE AVANZADO E INTELIGENCIA ARTIFICIAL
+├── Hardware Crítico & Workstations: Mantenimiento y resolución de nivel componente
+└── Inteligencia Artificial Local: Ollama (LLMs locales), asistentes de código (CLI)
